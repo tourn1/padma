@@ -158,7 +158,7 @@
         }
 
         .btn-nav {
-            background-color: var(--accent-terracotta);
+            background-color: var(--accent-sage);
             color: var(--white) !important;
             padding: 0.6rem 1.4rem;
             border-radius: 50px;
@@ -166,7 +166,7 @@
         }
 
         .btn-nav:hover {
-            background-color: #b8755b;
+            background-color: var(--accent-sage-dark);
             transform: translateY(-2px);
         }
 
@@ -248,6 +248,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            gap: 10px;
             transition: var(--transition-smooth);
         }
 
@@ -578,6 +579,11 @@
 
             .menu-toggle {
                 display: block;
+                z-index: 1003;
+            }
+
+            nav {
+                position: absolute;
             }
 
             /* Off-canvas Navigation for Mobile */
@@ -595,6 +601,7 @@
                 padding: 2rem;
                 box-shadow: -10px 0 30px rgba(0,0,0,0.1);
                 transition: var(--transition-smooth);
+                z-index: 1002;
             }
 
             nav ul.active {
@@ -689,7 +696,9 @@
                 <a href="#productos" class="btn-primary">
                     <i class="fa-solid fa-leaf"></i> Ver Productos Naturales
                 </a>
-                <a href="#clases" class="btn-secondary">Clases de Yoga</a>
+                <a href="#clases" class="btn-secondary">
+                    <i class="fa-solid fa-spa"></i> Clases de Yoga
+                </a>
             </div>
         </div>
     </section>
