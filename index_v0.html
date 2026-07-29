@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Padma Yoga | Encuentra tu paz interior</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-primary: #FAF7F2;
+            --bg-secondary: #F2ECE1;
+            --accent-sage: #7A8B7B;
+            --accent-sage-dark: #586759;
+            --accent-terracotta: #D08C70;
+            --text-main: #2C332C;
+            --text-muted: #656E65;
+            --white: #FFFFFF;
+            --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
+            --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .brand-logo-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+        }
+
+        /* --- Animations CSS --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition-smooth);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Header & Nav --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: var(--transition-smooth);
+        }
+
+        header.scrolled {
+            background: rgba(250, 247, 242, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 0.8rem 5%;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        }
+
+        .brand-logo {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Estilo para el Logo en Imagen */
+        .brand-logo img {
+            height: 48px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .brand-logo-text {
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+            color: var(--accent-sage-dark);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-terracotta);
+            transition: var(--transition-smooth);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .btn-nav {
+            background-color: var(--accent-sage);
+            color: var(--white) !important;
+            padding: 0.6rem 1.4rem;
+            border-radius: 50px;
+            transition: var(--transition-smooth) !important;
+        }
+
+        .btn-nav:hover {
+            background-color: var(--accent-sage-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-nav::after {
+            display: none;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 5% 4rem;
+            position: relative;
+            background: linear-gradient(135deg, rgba(250, 247, 242, 0.85) 0%, rgba(242, 236, 225, 0.7) 100%),
+                url('https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+        }
+
+        .hero-content {
+            max-width: 650px;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            color: var(--accent-terracotta);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            line-height: 1.15;
+            color: var(--text-main);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-terracotta);
+            color: var(--white);
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition-smooth);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .btn-primary:hover {
+            background-color: #b8755b;
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary {
+            border: 1px solid var(--accent-sage-dark);
+            color: var(--accent-sage-dark);
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition-smooth);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--accent-sage);
+            color: var(--white);
+            border-color: var(--accent-sage);
+        }
+
+        /* --- Section Styling --- */
+        section {
+            padding: 6rem 5%;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.8rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-main);
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        /* --- About Section --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: var(--transition-smooth);
+        }
+
+        .about-image:hover img {
+            transform: scale(1.03);
+        }
+
+        .about-text h3 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-sage-dark);
+        }
+
+        .about-text p {
+            margin-bottom: 1.2rem;
+            color: var(--text-muted);
+        }
+
+        /* --- Classes Section --- */
+        .classes {
+            background-color: var(--bg-secondary);
+        }
+
+        .classes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .class-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition-smooth);
+        }
+
+        .class-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .class-img {
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .class-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-smooth);
+        }
+
+        .class-card:hover .class-img img {
+            transform: scale(1.05);
+        }
+
+        .class-info {
+            padding: 1.8rem;
+        }
+
+        .class-info h3 {
+            font-size: 1.6rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .class-info p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.2rem;
+        }
+
+        /* --- Instagram Feed --- */
+        .insta-feed {
+            text-align: center;
+        }
+
+        .insta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .insta-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            aspect-ratio: 1;
+        }
+
+        .insta-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-smooth);
+        }
+
+        .insta-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(122, 139, 123, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition-smooth);
+            color: var(--white);
+            font-size: 1.8rem;
+        }
+
+        .insta-item:hover .insta-overlay {
+            opacity: 1;
+        }
+
+        .insta-item:hover img {
+            transform: scale(1.08);
+        }
+
+        /* --- Contact Section --- */
+        .contact {
+            background-color: var(--accent-sage);
+            color: var(--white);
+            border-radius: 30px;
+            margin: 4rem 5%;
+            padding: 4rem 3rem;
+            text-align: center;
+        }
+
+        .contact h2 {
+            color: var(--white);
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            opacity: 0.9;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+
+        .social-btn:hover {
+            background: var(--white);
+            color: var(--accent-sage-dark);
+            transform: translateY(-4px);
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 2rem 5%;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem 5%;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact h2 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Navigation -->
+    <header id="header">
+        <a href="#" class="brand-logo">
+            <!-- REEMPLAZAR CON LA FOTO DE PERFIL / LOGO -->
+            <img src="logo-padma.jpg" alt="Padma Yoga Logo">
+            <span class="brand-logo-text">PADMA YOGA</span>
+        </a>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#clases">Clases</a></li>
+                <li><a href="#comunidad">Comunidad</a></li>
+                <li><a href="https://www.instagram.com/padma.y.yoga/" target="_blank" class="btn-nav">Reservar Clase</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-content reveal">
+            <span class="hero-tag">Bienvenid@ a Padma Yoga</span>
+            <h1>Florece desde tu interior y conecta con tu paz</h1>
+            <p>Un espacio consciente dedicado al movimiento, la respiración y el bienestar integral. Descubre nuestras
+                clases diseñadas para armonizar cuerpo y mente.</p>
+            <div class="hero-btns">
+                <a href="https://www.instagram.com/padma.y.yoga/" target="_blank" class="btn-primary">
+                    <i class="fa-brands fa-instagram"></i> Ir a @padma.y.yoga
+                </a>
+                <a href="#clases" class="btn-secondary">Ver Clases</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="nosotros">
+        <div class="about-grid">
+            <div class="about-image reveal">
+                <!-- REEMPLAZAR CON UNA FOTO REAL DE TU PERFIL -->
+                <img src="foto-nosotros.jpg" alt="Práctica en Padma Yoga">
+            </div>
+            <div class="about-text reveal">
+                <h3>El significado del Loto (Padma)</h3>
+                <p>La flor de loto florece impecable en medio de las aguas profundas. En Padma Yoga, buscamos darte
+                    herramientas para cultivar esa misma paz y fortaleza en tu vida cotidiana.</p>
+                <p>Nuestra práctica combina posturas físicas (asanas), ejercicios de respiración (pranayama) y
+                    meditación para guiarte en una transformación consciente y amorosa.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Classes Section -->
+    <section class="classes" id="clases">
+        <div class="section-header reveal">
+            <h2>Nuestras Prácticas</h2>
+            <p>Encuentra el estilo de yoga que mejor se adapte a tu energía y momento de vida.</p>
+        </div>
+        <div class="classes-grid">
+            <div class="class-card reveal">
+                <div class="class-img">
+                    <img src="clase-vinyasa.jpg" alt="Vinyasa Flow">
+                </div>
+                <div class="class-info">
+                    <h3>Vinyasa Flow</h3>
+                    <p>Secuencias dinámicas coordinadas con la respiración para generar calor interior, fuerza y
+                        flexibilidad.</p>
+                </div>
+            </div>
+            <div class="class-card reveal">
+                <div class="class-img">
+                    <img src="clase-hatha.jpg" alt="Hatha Yoga">
+                </div>
+                <div class="class-info">
+                    <h3>Hatha Yoga</h3>
+                    <p>Práctica consciente enfocada en la alineación, sostén de posturas y búsqueda de calma en el
+                        movimiento.</p>
+                </div>
+            </div>
+            <div class="class-card reveal">
+                <div class="class-img">
+                    <img src="clase-meditacion.jpg" alt="Pranayama & Meditación">
+                </div>
+                <div class="class-info">
+                    <h3>Pranayama & Meditación</h3>
+                    <p>Sesiones guiadas para calmar el sistema nervioso, liberar el estrés y profundizar en el
+                        autoconocimiento.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instagram Section con Fotos Reales -->
+    <section class="insta-feed" id="comunidad">
+        <div class="section-header reveal">
+            <h2>Conecta en Instagram</h2>
+            <p>Sigue nuestra comunidad en <strong>@padma.y.yoga</strong> para tips, horarios actualizados y momentos de
+                práctica.</p>
+        </div>
+        <div class="insta-grid">
+            <a href="https://www.instagram.com/padma.y.yoga/" target="_blank" class="insta-item reveal">
+                <img src="insta-1.jpg" alt="Publicación Padma Yoga 1">
+                <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
+            </a>
+            <a href="https://www.instagram.com/padma.y.yoga/" target="_blank" class="insta-item reveal">
+                <img src="insta-2.jpg" alt="Publicación Padma Yoga 2">
+                <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
+            </a>
+            <a href="https://www.instagram.com/padma.y.yoga/" target="_blank" class="insta-item reveal">
+                <img src="insta-3.jpg" alt="Publicación Padma Yoga 3">
+                <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
+            </a>
+            <a href="https://www.instagram.com/padma.y.yoga/" target="_blank" class="insta-item reveal">
+                <img src="insta-4.jpg" alt="Publicación Padma Yoga 4">
+                <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Contact Banner -->
+    <section class="contact reveal">
+        <h2>¿Lista/o para comenzar tu práctica?</h2>
+        <p>Escríbenos por Instagram para consultar horarios disponibles, modalidades presenciales u online y reservar tu
+            lugar.</p>
+        <a href="https://www.instagram.com/padma.y.yoga/" target="_blank" class="btn-primary"
+            style="background-color: var(--white); color: var(--accent-sage-dark);">
+            <i class="fa-brands fa-instagram"></i> Contactar por Instagram
+        </a>
+        <div class="social-links">
+            <a href="https://www.instagram.com/padma.y.yoga/" target="_blank" class="social-btn"><i
+                    class="fa-brands fa-instagram"></i></a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Padma Yoga. Todos los derechos reservados. | Conectado con @padma.y.yoga</p>
+    </footer>
+
+    <!-- JavaScript para Efectos y Transiciones -->
+    <script>
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+
+</html>
