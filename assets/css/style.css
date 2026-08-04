@@ -1,0 +1,645 @@
+:root {
+    --bg-primary: #FAF7F2;
+    --bg-secondary: #F2ECE1;
+    --accent-sage: #7A8B7B;
+    --accent-sage-dark: #586759;
+    --accent-terracotta: #D08C70;
+    --text-main: #2C332C;
+    --text-muted: #656E65;
+    --white: #FFFFFF;
+    --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
+    --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+h1,
+h2,
+h3,
+h4,
+.brand-logo-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+}
+
+/* --- Animations CSS --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: var(--transition-smooth);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Header & Nav --- */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.2rem 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    transition: var(--transition-smooth);
+}
+
+header.scrolled {
+    background: rgba(250, 247, 242, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 0.8rem 6%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.brand-logo {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 1001;
+}
+
+.brand-logo img {
+    height: 42px;
+    width: 42px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.brand-logo-text {
+    font-size: 1.6rem;
+    letter-spacing: 1.5px;
+    color: var(--accent-sage-dark);
+}
+
+/* Mobile Menu Toggle Button */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--accent-sage-dark);
+    cursor: pointer;
+    z-index: 1001;
+    padding: 5px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    align-items: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    transition: var(--transition-smooth);
+    position: relative;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent-terracotta);
+    transition: var(--transition-smooth);
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+.btn-nav {
+    background-color: var(--accent-sage);
+    color: var(--white) !important;
+    padding: 0.6rem 1.4rem;
+    border-radius: 50px;
+    transition: var(--transition-smooth) !important;
+}
+
+.btn-nav:hover {
+    background-color: var(--accent-sage-dark);
+    transform: translateY(-2px);
+}
+
+.btn-nav::after {
+    display: none;
+}
+
+/* --- Hero Section --- */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 6% 4rem;
+    position: relative;
+    background: linear-gradient(135deg, rgba(250, 247, 242, 0.88) 0%, rgba(242, 236, 225, 0.75) 100%),
+        url('https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+}
+
+.hero-content {
+    max-width: 650px;
+}
+
+.hero-tag {
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 2.5px;
+    color: var(--accent-terracotta);
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+}
+
+.hero h1 {
+    font-size: clamp(2.4rem, 6vw, 3.8rem);
+    line-height: 1.15;
+    color: var(--text-main);
+    margin-bottom: 1.2rem;
+}
+
+.hero p {
+    font-size: clamp(1rem, 2.5vw, 1.15rem);
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+}
+
+.hero-btns {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn-primary {
+    background-color: var(--accent-terracotta);
+    color: var(--white);
+    padding: 0.9rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: var(--transition-smooth);
+    box-shadow: var(--shadow-soft);
+}
+
+.btn-primary:hover {
+    background-color: #b8755b;
+    transform: translateY(-3px);
+}
+
+.btn-secondary {
+    border: 1px solid var(--accent-sage-dark);
+    color: var(--accent-sage-dark);
+    padding: 0.9rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: var(--transition-smooth);
+}
+
+.btn-secondary:hover {
+    background-color: var(--accent-sage);
+    color: var(--white);
+    border-color: var(--accent-sage);
+}
+
+/* --- Section Styling --- */
+section {
+    padding: 5rem 6%;
+}
+
+.section-header {
+    text-align: center;
+    max-width: 650px;
+    margin: 0 auto 3rem;
+}
+
+.section-header .tag-badge {
+    background: rgba(208, 140, 112, 0.15);
+    color: var(--accent-terracotta);
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 0.8rem;
+}
+
+.section-header h2 {
+    font-size: clamp(2.2rem, 5vw, 2.8rem);
+    margin-bottom: 0.6rem;
+    color: var(--text-main);
+}
+
+.section-header p {
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+/* --- Products Section (Protagonista) --- */
+.products {
+    background-color: var(--bg-secondary);
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.product-card {
+    background: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition-smooth);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+}
+
+.product-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(5px);
+    color: var(--accent-sage-dark);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.3rem 0.8rem;
+    border-radius: 30px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    z-index: 2;
+}
+
+.product-img {
+    height: 250px;
+    overflow: hidden;
+    position: relative;
+}
+
+.product-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition-smooth);
+}
+
+.product-card:hover .product-img img {
+    transform: scale(1.06);
+}
+
+.product-info {
+    padding: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.product-info h3 {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+    color: var(--accent-sage-dark);
+}
+
+.product-info p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+.btn-consult {
+    background-color: var(--accent-sage);
+    color: var(--white);
+    text-decoration: none;
+    padding: 0.75rem 1.2rem;
+    border-radius: 50px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: var(--transition-smooth);
+    width: 100%;
+}
+
+.btn-consult:hover {
+    background-color: var(--accent-sage-dark);
+}
+
+/* --- About Section --- */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3.5rem;
+    align-items: center;
+}
+
+.about-image {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+}
+
+.about-image img {
+    width: 100%;
+    height: 100%;
+    max-height: 450px;
+    object-fit: cover;
+    display: block;
+    transition: var(--transition-smooth);
+}
+
+.about-text h3 {
+    font-size: clamp(1.8rem, 4vw, 2.2rem);
+    margin-bottom: 1.2rem;
+    color: var(--accent-sage-dark);
+}
+
+.about-text p {
+    margin-bottom: 1rem;
+    color: var(--text-muted);
+}
+
+/* --- Classes Section --- */
+.classes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.8rem;
+}
+
+.class-card {
+    background: var(--white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition-smooth);
+    border: 1px solid rgba(0,0,0,0.03);
+}
+
+.class-img {
+    height: 200px;
+    overflow: hidden;
+}
+
+.class-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition-smooth);
+}
+
+.class-info {
+    padding: 1.5rem;
+}
+
+.class-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.class-info p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* --- Instagram Feed --- */
+.insta-feed {
+    text-align: center;
+    background-color: var(--bg-secondary);
+}
+
+.insta-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.2rem;
+    margin-top: 2rem;
+}
+
+.insta-item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 1;
+}
+
+.insta-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition-smooth);
+}
+
+.insta-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(122, 139, 123, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: var(--transition-smooth);
+    color: var(--white);
+    font-size: 1.8rem;
+}
+
+.insta-item:hover .insta-overlay {
+    opacity: 1;
+}
+
+/* --- Contact Section --- */
+.contact {
+    background-color: var(--accent-sage);
+    color: var(--white);
+    border-radius: 24px;
+    margin: 3rem 6%;
+    padding: 3.5rem 2rem;
+    text-align: center;
+}
+
+.contact h2 {
+    color: var(--white);
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 1rem;
+}
+
+.contact p {
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    opacity: 0.95;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+    margin-top: 1.8rem;
+}
+
+.social-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    text-decoration: none;
+    transition: var(--transition-smooth);
+}
+
+/* --- Footer --- */
+footer {
+    text-align: center;
+    padding: 2rem 6%;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* ==========================================
+   RESPONSIVE MOBILE DESIGN (iPhones 6" / <768px)
+========================================== */
+@media (max-width: 768px) {
+    header {
+        padding: 1rem 5%;
+    }
+
+    .brand-logo-text {
+        font-size: 1.4rem;
+    }
+
+    .menu-toggle {
+        display: block;
+        z-index: 1003;
+    }
+
+    nav {
+        position: absolute;
+    }
+
+    /* Off-canvas Navigation for Mobile */
+    nav ul {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 320px;
+        height: 100vh;
+        background: var(--bg-primary);
+        flex-direction: column;
+        justify-content: center;
+        gap: 2rem;
+        padding: 2rem;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+        transition: var(--transition-smooth);
+        z-index: 1002;
+    }
+
+    nav ul.active {
+        right: 0;
+    }
+
+    nav a {
+        font-size: 1.1rem;
+    }
+
+    .hero {
+        padding: 7.5rem 6% 3.5rem;
+        min-height: auto;
+        text-align: center;
+    }
+
+    .hero-btns {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn-primary, .btn-secondary {
+        width: 100%;
+        padding: 0.85rem 1.5rem;
+    }
+
+    section {
+        padding: 3.8rem 6%;
+    }
+
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .about-image img {
+        height: 280px;
+    }
+
+    .classes-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* 2 Columns for Instagram grid on iPhone */
+    .insta-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+    }
+
+    .contact {
+        margin: 2rem 4%;
+        padding: 2.5rem 1.2rem;
+    }
+}
