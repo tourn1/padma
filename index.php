@@ -24,17 +24,17 @@ $defaultTexts = [
     "p1_title" => "Aceites Esenciales Puros",
     "p1_desc" => "Mezclas botánicas concentradas para aromaterapia, relajación profunda y alivio del estrés cotidiano.",
     "p1_btn" => "Consultar Disponibilidad",
-    "link_p1_wa" => "https://wa.me/?text=Hola!%20Quiero%20consultar%20sobre%20los%20Aceites%20Esenciales%20Puros",
+    "link_p1_wa" => "https://wa.me/5491151028042?text=Hola!%20Quiero%20consultar%20sobre%20los%20Aceites%20Esenciales%20Puros",
     "p2_badge" => "Artesanal",
     "p2_title" => "Cremas & Bálsamos Botánicos",
     "p2_desc" => "Formulaciones nutritivas base plantas y mantecas naturales para restaurar e hidratar tu piel en profundidad.",
     "p2_btn" => "Consultar Disponibilidad",
-    "link_p2_wa" => "https://wa.me/?text=Hola!%20Quiero%20consultar%20sobre%20las%20Cremas%20y%20Bálsamos%20Botánicos",
+    "link_p2_wa" => "https://wa.me/5491151028042?text=Hola!%20Quiero%20consultar%20sobre%20las%20Cremas%20y%20Bálsamos%20Botánicos",
     "p3_badge" => "Cruelty Free",
     "p3_title" => "Sahumerios & Atados de Hierbas",
     "p3_desc" => "Hierbas sagradas y resinas naturales para saumar, limpiar las energías de tus espacios y crear ambientes de paz.",
     "p3_btn" => "Consultar Disponibilidad",
-    "link_p3_wa" => "https://wa.me/?text=Hola!%20Quiero%20consultar%20sobre%20los%20Sahumerios%20y%20Atados%20de%20Hierbas",
+    "link_p3_wa" => "https://wa.me/5491151028042?text=Hola!%20Quiero%20consultar%20sobre%20los%20Sahumerios%20y%20Atados%20de%20Hierbas",
     "about_title" => "Nuestra Filosofía Padma",
     "about_p1" => "La flor de loto (Padma) simboliza la pureza del cuerpo y la mente que florece en medio de la rutina. Creemos en un estilo de vida consciente, donde los productos que aplicas en tu piel y el movimiento de tu cuerpo vibran en sintonía.",
     "about_p2" => "Seleccionamos materias primas sustentables y cultivamos un espacio de práctica amoroso para tu transformación integral.",
@@ -57,7 +57,7 @@ $defaultTexts = [
     "contact_btn" => "Contactar vía Instagram",
     "link_contact_btn" => "https://www.instagram.com/padma.y.yoga/",
     "link_contact_insta" => "https://www.instagram.com/padma.y.yoga/",
-    "link_contact_wa" => "https://wa.me/",
+    "link_contact_wa" => "https://wa.me/5491151028042",
     "footer_text" => "© 2026 Padma Yoga. Todos los derechos reservados."
 ];
 
@@ -69,7 +69,8 @@ if (file_exists($textFile)) {
     }
 }
 
-function getImgUrl($filename) {
+function getImgUrl($filename)
+{
     $uploadPath = dirname(__FILE__) . '/admin/upload/' . $filename;
     if (file_exists($uploadPath)) {
         return 'admin/upload/' . $filename . '?v=' . filemtime($uploadPath);
@@ -77,7 +78,8 @@ function getImgUrl($filename) {
     return 'assets/img/' . $filename;
 }
 
-function e($str) {
+function e($str)
+{
     return htmlspecialchars($str ?? '', ENT_QUOTES, 'UTF-8');
 }
 
@@ -89,7 +91,7 @@ if (file_exists($catalogFile)) {
     $savedProducts = json_decode($content, true);
     if (is_array($savedProducts)) {
         // Ordenar por el campo 'orden'
-        usort($savedProducts, function($a, $b) {
+        usort($savedProducts, function ($a, $b) {
             return ($a['orden'] ?? 0) <=> ($b['orden'] ?? 0);
         });
         foreach ($savedProducts as $sp) {
@@ -98,36 +100,50 @@ if (file_exists($catalogFile)) {
             $isDestacado = isset($sp['destacado']) && $sp['destacado'] === true;
             if ($isActive && $isDestacado) {
                 $heroProducts[] = $sp;
-                if (count($heroProducts) >= 3) break;
+                if (count($heroProducts) >= 3)
+                    break;
             }
         }
     }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LGGNT2486F"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-LGGNT2486F');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Padma Yoga & Productos Naturales | Bienestar Holístico & Cosmética Orgánica</title>
-    
+
     <!-- Primary Meta Tags (SEO & SEM) -->
-    <meta name="description" content="Descubre Padma Yoga: productos 100% naturales, cosmética botánica, aceites esenciales puros, sahumerios artesanales y clases de yoga (Vinyasa, Hatha, Meditación). Reconecta con tu bienestar holístico.">
-    <meta name="keywords" content="padma yoga, productos naturales, cosmética natural, aceites esenciales, sahumerios artesanales, clases de yoga, vinyasa flow, hatha yoga, meditación, bienestar holístico, aromaterapia">
+    <meta name="description"
+        content="Descubre Padma Yoga: productos 100% naturales, cosmética botánica, aceites esenciales puros, sahumerios artesanales y clases de yoga (Vinyasa, Hatha, Meditación). Reconecta con tu bienestar holístico.">
+    <meta name="keywords"
+        content="padma yoga, productos naturales, cosmética natural, aceites esenciales, sahumerios artesanales, clases de yoga, vinyasa flow, hatha yoga, meditación, bienestar holístico, aromaterapia">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Padma Yoga">
-    
+
     <!-- Open Graph / Facebook / WhatsApp (Social SEM) -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Padma Yoga & Productos Naturales | Bienestar Holístico">
-    <meta property="og:description" content="Cosmética botánica orgánica, aromaterapia artesanal y clases de yoga para reconectar con tu bienestar diario.">
+    <meta property="og:description"
+        content="Cosmética botánica orgánica, aromaterapia artesanal y clases de yoga para reconectar con tu bienestar diario.">
     <meta property="og:image" content="<?php echo getImgUrl('logo-padma.jpg'); ?>">
-    
+
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Padma Yoga & Productos Naturales | Bienestar Holístico">
-    <meta name="twitter:description" content="Productos 100% naturales y clases de yoga diseñadas para reconectar con tu esencia.">
+    <meta name="twitter:description"
+        content="Productos 100% naturales y clases de yoga diseñadas para reconectar con tu esencia.">
     <meta name="twitter:image" content="<?php echo getImgUrl('logo-padma.jpg'); ?>">
 
     <!-- Schema.org JSON-LD (Structured Data for Google) -->
@@ -147,7 +163,9 @@ if (file_exists($catalogFile)) {
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Styles -->
@@ -203,7 +221,28 @@ if (file_exists($catalogFile)) {
             <h2><?php echo e($texts['prod_title']); ?></h2>
             <p><?php echo e($texts['prod_desc']); ?></p>
         </div>
-        
+
+        <div class="reveal" style="text-align:center; margin-bottom:2rem;">
+            <a href="aromaterapia.php" style="
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                color: var(--sage);
+                font-family: 'Plus Jakarta Sans', sans-serif;
+                font-size: 0.95rem;
+                font-weight: 500;
+                text-decoration: none;
+                border: 1.5px solid var(--sage);
+                padding: 0.55rem 1.4rem;
+                border-radius: 50px;
+                transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            "
+            onmouseover="this.style.background='var(--sage)';this.style.color='#fff';"
+            onmouseout="this.style.background='transparent';this.style.color='var(--sage)';">
+                <i class="fas fa-spa"></i> Saber más sobre Aromaterapia
+            </a>
+        </div>
+
         <div class="products-grid">
             <?php if (!empty($heroProducts)): ?>
                 <?php foreach ($heroProducts as $index => $prod): ?>
@@ -212,17 +251,20 @@ if (file_exists($catalogFile)) {
                         <span class="product-badge">100% Natural</span>
                         <div class="product-img">
                             <?php if (!empty($prod['imagen']) && file_exists(dirname(__FILE__) . '/assets/img/catalogo/' . $prod['imagen'])): ?>
-                                <img src="assets/img/catalogo/<?php echo e($prod['imagen']); ?>" alt="<?php echo e($prod['nombre']); ?>">
+                                <img src="assets/img/catalogo/<?php echo e($prod['imagen']); ?>"
+                                    alt="<?php echo e($prod['nombre']); ?>">
                             <?php else: ?>
                                 <img src="<?php echo getImgUrl('producto-aceites.jpg'); ?>" alt="<?php echo e($prod['nombre']); ?>">
                             <?php endif; ?>
                         </div>
                         <div class="product-info">
                             <h3><?php echo e($prod['nombre']); ?></h3>
-                            <div style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1.5rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                            <div
+                                style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1.5rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
                                 <?php echo strip_tags($prod['descripcion']); ?>
                             </div>
-                            <a href="https://wa.me/?text=<?php echo urlencode('Hola! Quiero consultar sobre ' . $prod['nombre']); ?>" target="_blank" class="btn-consult" style="margin-top: auto;">
+                            <a href="https://wa.me/5491151028042?text=<?php echo urlencode('Hola! Quiero consultar sobre ' . $prod['nombre']); ?>"
+                                target="_blank" class="btn-consult" style="margin-top: auto;">
                                 <i class="fa-brands fa-whatsapp"></i> Consultar Disponibilidad
                             </a>
                         </div>
@@ -234,12 +276,14 @@ if (file_exists($catalogFile)) {
                 <div class="product-card reveal">
                     <span class="product-badge"><?php echo e($texts['p1_badge']); ?></span>
                     <div class="product-img">
-                        <img src="<?php echo getImgUrl('producto-aceites.jpg'); ?>" alt="<?php echo e($texts['p1_title']); ?>">
+                        <img src="<?php echo getImgUrl('producto-aceites.jpg'); ?>"
+                            alt="<?php echo e($texts['p1_title']); ?>">
                     </div>
                     <div class="product-info">
                         <h3><?php echo e($texts['p1_title']); ?></h3>
                         <p><?php echo e($texts['p1_desc']); ?></p>
-                        <a href="<?php echo e($texts['link_p1_wa']); ?>" target="_blank" class="btn-consult" style="margin-top: auto;">
+                        <a href="<?php echo e($texts['link_p1_wa']); ?>" target="_blank" class="btn-consult"
+                            style="margin-top: auto;">
                             <i class="fa-brands fa-whatsapp"></i> <?php echo e($texts['p1_btn']); ?>
                         </a>
                     </div>
@@ -249,12 +293,14 @@ if (file_exists($catalogFile)) {
                 <div class="product-card reveal">
                     <span class="product-badge"><?php echo e($texts['p2_badge']); ?></span>
                     <div class="product-img">
-                        <img src="<?php echo getImgUrl('producto-cremas.jpg'); ?>" alt="<?php echo e($texts['p2_title']); ?>">
+                        <img src="<?php echo getImgUrl('producto-cremas.jpg'); ?>"
+                            alt="<?php echo e($texts['p2_title']); ?>">
                     </div>
                     <div class="product-info">
                         <h3><?php echo e($texts['p2_title']); ?></h3>
                         <p><?php echo e($texts['p2_desc']); ?></p>
-                        <a href="<?php echo e($texts['link_p2_wa']); ?>" target="_blank" class="btn-consult" style="margin-top: auto;">
+                        <a href="<?php echo e($texts['link_p2_wa']); ?>" target="_blank" class="btn-consult"
+                            style="margin-top: auto;">
                             <i class="fa-brands fa-whatsapp"></i> <?php echo e($texts['p2_btn']); ?>
                         </a>
                     </div>
@@ -264,12 +310,14 @@ if (file_exists($catalogFile)) {
                 <div class="product-card reveal">
                     <span class="product-badge"><?php echo e($texts['p3_badge']); ?></span>
                     <div class="product-img">
-                        <img src="<?php echo getImgUrl('producto-sahumerios.jpg'); ?>" alt="<?php echo e($texts['p3_title']); ?>">
+                        <img src="<?php echo getImgUrl('producto-sahumerios.jpg'); ?>"
+                            alt="<?php echo e($texts['p3_title']); ?>">
                     </div>
                     <div class="product-info">
                         <h3><?php echo e($texts['p3_title']); ?></h3>
                         <p><?php echo e($texts['p3_desc']); ?></p>
-                        <a href="<?php echo e($texts['link_p3_wa']); ?>" target="_blank" class="btn-consult" style="margin-top: auto;">
+                        <a href="<?php echo e($texts['link_p3_wa']); ?>" target="_blank" class="btn-consult"
+                            style="margin-top: auto;">
                             <i class="fa-brands fa-whatsapp"></i> <?php echo e($texts['p3_btn']); ?>
                         </a>
                     </div>
@@ -302,9 +350,11 @@ if (file_exists($catalogFile)) {
             <div class="class-card reveal">
                 <div class="class-img">
                     <?php if (($texts['c1_type'] ?? 'image') === 'video' && !empty($texts['c1_video_file'])): ?>
-                        <video src="<?php echo getImgUrl($texts['c1_video_file']); ?>" autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover; object-position: 50% <?php echo e($texts['c1_img_pos'] ?? '50'); ?>%;"></video>
+                        <video src="<?php echo getImgUrl($texts['c1_video_file']); ?>" autoplay loop muted playsinline
+                            style="width: 100%; height: 100%; object-fit: cover; object-position: 50% <?php echo e($texts['c1_img_pos'] ?? '50'); ?>%;"></video>
                     <?php else: ?>
-                        <img src="<?php echo getImgUrl('clase-vinyasa.jpg'); ?>" alt="<?php echo e($texts['c1_title']); ?>" style="object-position: 50% <?php echo e($texts['c1_img_pos'] ?? '50'); ?>%;">
+                        <img src="<?php echo getImgUrl('clase-vinyasa.jpg'); ?>" alt="<?php echo e($texts['c1_title']); ?>"
+                            style="object-position: 50% <?php echo e($texts['c1_img_pos'] ?? '50'); ?>%;">
                     <?php endif; ?>
                 </div>
                 <div class="class-info">
@@ -315,9 +365,11 @@ if (file_exists($catalogFile)) {
             <div class="class-card reveal">
                 <div class="class-img">
                     <?php if (($texts['c2_type'] ?? 'image') === 'video' && !empty($texts['c2_video_file'])): ?>
-                        <video src="<?php echo getImgUrl($texts['c2_video_file']); ?>" autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover; object-position: 50% <?php echo e($texts['c2_img_pos'] ?? '50'); ?>%;"></video>
+                        <video src="<?php echo getImgUrl($texts['c2_video_file']); ?>" autoplay loop muted playsinline
+                            style="width: 100%; height: 100%; object-fit: cover; object-position: 50% <?php echo e($texts['c2_img_pos'] ?? '50'); ?>%;"></video>
                     <?php else: ?>
-                        <img src="<?php echo getImgUrl('clase-hatha.jpg'); ?>" alt="<?php echo e($texts['c2_title']); ?>" style="object-position: 50% <?php echo e($texts['c2_img_pos'] ?? '50'); ?>%;">
+                        <img src="<?php echo getImgUrl('clase-hatha.jpg'); ?>" alt="<?php echo e($texts['c2_title']); ?>"
+                            style="object-position: 50% <?php echo e($texts['c2_img_pos'] ?? '50'); ?>%;">
                     <?php endif; ?>
                 </div>
                 <div class="class-info">
@@ -328,9 +380,12 @@ if (file_exists($catalogFile)) {
             <div class="class-card reveal">
                 <div class="class-img">
                     <?php if (($texts['c3_type'] ?? 'image') === 'video' && !empty($texts['c3_video_file'])): ?>
-                        <video src="<?php echo getImgUrl($texts['c3_video_file']); ?>" autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover; object-position: 50% <?php echo e($texts['c3_img_pos'] ?? '50'); ?>%;"></video>
+                        <video src="<?php echo getImgUrl($texts['c3_video_file']); ?>" autoplay loop muted playsinline
+                            style="width: 100%; height: 100%; object-fit: cover; object-position: 50% <?php echo e($texts['c3_img_pos'] ?? '50'); ?>%;"></video>
                     <?php else: ?>
-                        <img src="<?php echo getImgUrl('clase-meditacion.jpg'); ?>" alt="<?php echo e($texts['c3_title']); ?>" style="object-position: 50% <?php echo e($texts['c3_img_pos'] ?? '50'); ?>%;">
+                        <img src="<?php echo getImgUrl('clase-meditacion.jpg'); ?>"
+                            alt="<?php echo e($texts['c3_title']); ?>"
+                            style="object-position: 50% <?php echo e($texts['c3_img_pos'] ?? '50'); ?>%;">
                     <?php endif; ?>
                 </div>
                 <div class="class-info">
@@ -347,23 +402,21 @@ if (file_exists($catalogFile)) {
             <h2><?php echo e($texts['insta_title']); ?></h2>
             <p><?php echo e($texts['insta_desc']); ?></p>
         </div>
-        <div class="insta-grid">
-            <a href="<?php echo e($texts['link_insta_1']); ?>" target="_blank" class="insta-item reveal">
-                <img src="<?php echo getImgUrl('insta-1.jpg'); ?>" alt="Publicación Padma Yoga 1">
-                <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
-            </a>
-            <a href="<?php echo e($texts['link_insta_2']); ?>" target="_blank" class="insta-item reveal">
-                <img src="<?php echo getImgUrl('insta-2.jpg'); ?>" alt="Publicación Padma Yoga 2">
-                <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
-            </a>
-            <a href="<?php echo e($texts['link_insta_3']); ?>" target="_blank" class="insta-item reveal">
-                <img src="<?php echo getImgUrl('insta-3.jpg'); ?>" alt="Publicación Padma Yoga 3">
-                <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
-            </a>
-            <a href="<?php echo e($texts['link_insta_4']); ?>" target="_blank" class="insta-item reveal">
-                <img src="<?php echo getImgUrl('insta-4.jpg'); ?>" alt="Publicación Padma Yoga 4">
-                <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
-            </a>
+        <div class="insta-widget-container reveal"
+            style="text-align: center; margin: 2rem auto; max-width: 1000px; overflow: visible; padding: 0 48px;">
+            <!-- 
+            ========================================================================
+            WIDGET DE INSTAGRAM (Recomendado: Elfsight o SnapWidget)
+            1. Entrá a https://elfsight.com/es/instagram-feed-instashow/
+            2. Creá un widget gratuito (podés configurarlo para que muestre 3 posts)
+            3. Copiá el código de instalación y pegalo justo acá abajo:
+            ========================================================================
+            -->
+
+            <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+            <div class="elfsight-app-a4495199-afbc-4be9-aa13-281876d33f08" data-elfsight-app-lazy></div>
+
+            <!-- Si preferís volver a las imágenes estáticas, borrá este widget y restaurá el HTML anterior -->
         </div>
     </section>
 
@@ -371,13 +424,16 @@ if (file_exists($catalogFile)) {
     <section class="contact reveal">
         <h2><?php echo e($texts['contact_title']); ?></h2>
         <p><?php echo e($texts['contact_desc']); ?></p>
-        <a href="<?php echo e($texts['link_contact_btn']); ?>" target="_blank" class="btn-primary" style="background-color: var(--white); color: var(--accent-sage-dark);">
+        <a href="<?php echo e($texts['link_contact_btn']); ?>" target="_blank" class="btn-primary"
+            style="background-color: var(--white); color: var(--accent-sage-dark);">
             <i class="fa-brands fa-instagram"></i> <?php echo e($texts['contact_btn']); ?>
 
         </a>
         <div class="social-links">
-            <a href="<?php echo e($texts['link_contact_insta']); ?>" target="_blank" class="social-btn" aria-label="Visita nuestro Instagram"><i class="fa-brands fa-instagram"></i></a>
-            <a href="<?php echo e($texts['link_contact_wa']); ?>" target="_blank" class="social-btn" aria-label="Contactar por WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="<?php echo e($texts['link_contact_insta']); ?>" target="_blank" class="social-btn"
+                aria-label="Visita nuestro Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="<?php echo e($texts['link_contact_wa']); ?>" target="_blank" class="social-btn"
+                aria-label="Contactar por WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
         </div>
     </section>
 

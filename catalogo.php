@@ -89,6 +89,14 @@ if (!$loadedFromCatalog) {
 <html lang="es">
 
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LGGNT2486F"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-LGGNT2486F');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo PADMA - Bienestar Emocional</title>
@@ -376,6 +384,7 @@ if (!$loadedFromCatalog) {
                 padding: 1.5rem;
             }
         }
+
         /* --- Modal Galería --- */
         .modal {
             display: none;
@@ -387,7 +396,7 @@ if (!$loadedFromCatalog) {
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0,0,0,0.85);
+            background-color: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(5px);
         }
 
@@ -415,8 +424,13 @@ if (!$loadedFromCatalog) {
         }
 
         @keyframes zoom {
-            from {transform:scale(0.9)} 
-            to {transform:scale(1)}
+            from {
+                transform: scale(0.9)
+            }
+
+            to {
+                transform: scale(1)
+            }
         }
 
         .modal-close {
@@ -453,11 +467,19 @@ if (!$loadedFromCatalog) {
             z-index: 2001;
         }
 
-        .modal-prev { left: 10px; border-radius: 0 3px 3px 0; }
-        .modal-next { right: 10px; border-radius: 3px 0 0 3px; }
-        
-        .modal-prev:hover, .modal-next:hover {
-            background-color: rgba(0,0,0,0.6);
+        .modal-prev {
+            left: 10px;
+            border-radius: 0 3px 3px 0;
+        }
+
+        .modal-next {
+            right: 10px;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .modal-prev:hover,
+        .modal-next:hover {
+            background-color: rgba(0, 0, 0, 0.6);
         }
     </style>
 </head>
@@ -495,8 +517,7 @@ if (!$loadedFromCatalog) {
                             <img src="assets/img/catalogo/<?php echo htmlspecialchars($producto['imagen']); ?>"
                                 alt="<?php echo htmlspecialchars($producto['titulo']); ?>"
                                 style="width: 100%; height: 100%; object-fit: cover; display: block; cursor: pointer;"
-                                class="gallery-img" 
-                                data-caption="<?php echo htmlspecialchars($producto['titulo']); ?>"
+                                class="gallery-img" data-caption="<?php echo htmlspecialchars($producto['titulo']); ?>"
                                 data-imagenes="<?php echo htmlspecialchars(json_encode($producto['imagenes'])); ?>">
                         </div>
                     <?php endif; ?>
@@ -507,7 +528,7 @@ if (!$loadedFromCatalog) {
                     <button class="btn-ver-mas" onclick="toggleDesc(this)" style="display:none; margin-bottom: 1rem;">
                         <i class="fas fa-chevron-down"></i> Ver más
                     </button>
-                    <a href="https://wa.me/?text=<?php echo urlencode('Hola! Quiero consultar sobre ' . $producto['titulo']); ?>"
+                    <a href="https://wa.me/5491151028042?text=<?php echo urlencode('Hola! Quiero consultar sobre ' . $producto['titulo']); ?>"
                         target="_blank" class="btn-consult" style="margin-top: auto; align-self: flex-start;">
                         <i class="fa-brands fa-whatsapp"></i> Consultar Disponibilidad
                     </a>
@@ -561,7 +582,7 @@ if (!$loadedFromCatalog) {
             const closeBtn = document.querySelector('.modal-close');
             const prevBtn = document.querySelector('.modal-prev');
             const nextBtn = document.querySelector('.modal-next');
-            
+
             let currentProductImages = [];
             let currentImageIndex = 0;
             let currentFallbackCaption = "";
@@ -569,16 +590,16 @@ if (!$loadedFromCatalog) {
             const openModal = (productImages, fallbackImage, fallbackCaption) => {
                 currentProductImages = productImages;
                 currentFallbackCaption = fallbackCaption;
-                
+
                 if (currentProductImages.length === 0 && fallbackImage) {
                     currentProductImages = [{ archivo: fallbackImage, nombre: fallbackCaption }];
                 }
-                
+
                 if (currentProductImages.length === 0) return;
-                
+
                 currentImageIndex = 0;
                 updateModalContent();
-                
+
                 if (currentProductImages.length > 1) {
                     if (prevBtn) prevBtn.style.display = 'block';
                     if (nextBtn) nextBtn.style.display = 'block';
@@ -586,11 +607,11 @@ if (!$loadedFromCatalog) {
                     if (prevBtn) prevBtn.style.display = 'none';
                     if (nextBtn) nextBtn.style.display = 'none';
                 }
-                
+
                 modal.style.display = 'block';
                 document.body.style.overflow = 'hidden';
             };
-            
+
             const updateModalContent = () => {
                 const imgData = currentProductImages[currentImageIndex];
                 // Extraer solo el nombre del archivo de la ruta actual si es necesario, 
@@ -604,49 +625,49 @@ if (!$loadedFromCatalog) {
                     let productImages = [];
                     try {
                         productImages = JSON.parse(imgNode.getAttribute('data-imagenes'));
-                    } catch(e) {}
-                    
+                    } catch (e) { }
+
                     const fallbackImageSrc = imgNode.getAttribute('src').split('/').pop();
                     const fallbackCaption = imgNode.getAttribute('data-caption');
-                    
+
                     openModal(productImages, fallbackImageSrc, fallbackCaption);
                 });
             });
 
-            if(closeBtn) {
-                closeBtn.onclick = function() {
+            if (closeBtn) {
+                closeBtn.onclick = function () {
                     modal.style.display = 'none';
                     document.body.style.overflow = 'auto';
                 };
             }
 
-            if(prevBtn) {
+            if (prevBtn) {
                 prevBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    if(currentProductImages.length > 1) {
+                    if (currentProductImages.length > 1) {
                         currentImageIndex = (currentImageIndex - 1 + currentProductImages.length) % currentProductImages.length;
                         updateModalContent();
                     }
                 });
             }
 
-            if(nextBtn) {
+            if (nextBtn) {
                 nextBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    if(currentProductImages.length > 1) {
+                    if (currentProductImages.length > 1) {
                         currentImageIndex = (currentImageIndex + 1) % currentProductImages.length;
                         updateModalContent();
                     }
                 });
             }
 
-            modal.onclick = function(event) {
+            modal.onclick = function (event) {
                 if (event.target === modal || event.target === captionText) {
                     modal.style.display = 'none';
                     document.body.style.overflow = 'auto';
                 }
             };
-            
+
             // Navegación por teclado
             document.addEventListener('keydown', (e) => {
                 if (modal.style.display === 'block') {

@@ -883,64 +883,8 @@ function e($str) {
                 </p>
             </div>
             <div class="insta-grid">
-                <div class="insta-item">
-                    <div class="admin-img-container">
-                        <img src="<?php echo getAdminImgUrl('insta-1.jpg'); ?>" id="preview_i1" alt="Publicación Padma Yoga 1">
-                        <div class="admin-img-overlay">
-                            <i class="fa-solid fa-camera"></i>
-                            <span>Cambiar Imagen 1</span>
-                            <input type="file" name="img_i1" accept="image/*" class="admin-file-input" onchange="previewImg(this, 'preview_i1')">
-                        </div>
-                    </div>
-                    <div class="admin-url-group">
-                        <i class="fa-solid fa-link" title="Enlace Instagram 1"></i>
-                        <input type="text" name="texts[link_insta_1]" value="<?php echo e($texts['link_insta_1']); ?>" class="admin-input-url" placeholder="URL Instagram 1">
-                    </div>
-                </div>
-
-                <div class="insta-item">
-                    <div class="admin-img-container">
-                        <img src="<?php echo getAdminImgUrl('insta-2.jpg'); ?>" id="preview_i2" alt="Publicación Padma Yoga 2">
-                        <div class="admin-img-overlay">
-                            <i class="fa-solid fa-camera"></i>
-                            <span>Cambiar Imagen 2</span>
-                            <input type="file" name="img_i2" accept="image/*" class="admin-file-input" onchange="previewImg(this, 'preview_i2')">
-                        </div>
-                    </div>
-                    <div class="admin-url-group">
-                        <i class="fa-solid fa-link" title="Enlace Instagram 2"></i>
-                        <input type="text" name="texts[link_insta_2]" value="<?php echo e($texts['link_insta_2']); ?>" class="admin-input-url" placeholder="URL Instagram 2">
-                    </div>
-                </div>
-
-                <div class="insta-item">
-                    <div class="admin-img-container">
-                        <img src="<?php echo getAdminImgUrl('insta-3.jpg'); ?>" id="preview_i3" alt="Publicación Padma Yoga 3">
-                        <div class="admin-img-overlay">
-                            <i class="fa-solid fa-camera"></i>
-                            <span>Cambiar Imagen 3</span>
-                            <input type="file" name="img_i3" accept="image/*" class="admin-file-input" onchange="previewImg(this, 'preview_i3')">
-                        </div>
-                    </div>
-                    <div class="admin-url-group">
-                        <i class="fa-solid fa-link" title="Enlace Instagram 3"></i>
-                        <input type="text" name="texts[link_insta_3]" value="<?php echo e($texts['link_insta_3']); ?>" class="admin-input-url" placeholder="URL Instagram 3">
-                    </div>
-                </div>
-
-                <div class="insta-item">
-                    <div class="admin-img-container">
-                        <img src="<?php echo getAdminImgUrl('insta-4.jpg'); ?>" id="preview_i4" alt="Publicación Padma Yoga 4">
-                        <div class="admin-img-overlay">
-                            <i class="fa-solid fa-camera"></i>
-                            <span>Cambiar Imagen 4</span>
-                            <input type="file" name="img_i4" accept="image/*" class="admin-file-input" onchange="previewImg(this, 'preview_i4')">
-                        </div>
-                    </div>
-                    <div class="admin-url-group">
-                        <i class="fa-solid fa-link" title="Enlace Instagram 4"></i>
-                        <input type="text" name="texts[link_insta_4]" value="<?php echo e($texts['link_insta_4']); ?>" class="admin-input-url" placeholder="URL Instagram 4">
-                    </div>
+                <div class="admin-alert" style="grid-column: 1 / -1; margin-top: 20px;">
+                    <i class="fa-brands fa-instagram"></i> El feed de Instagram se carga automáticamente desde la cuenta <strong>@padma.y.yoga</strong> a través del widget de Elfsight. No es editable desde aquí.
                 </div>
             </div>
         </section>
