@@ -1,0 +1,14 @@
+[
+    {
+        "id": "usr_6a958e56244b22.68876738",
+        "usuario": "admin",
+        "clave": "admin",
+        "activo": true
+    },
+    {
+        "id": "usr_6a958e63503d75.05993663",
+        "usuario": "vane",
+        "clave": "vane",
+        "activo": true
+    }
+]

@@ -12,14 +12,39 @@ $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username'] ?? '');
     $password = trim($_POST['password'] ?? '');
+    $captcha  = $_POST['captcha_check'] ?? '';
 
-    // Validación de usuario y contraseña hardcodeados
-    if ($username === 'admin' && $password === 'admin') {
-        $_SESSION['admin_logged_in'] = true;
-        header('Location: admin.php');
-        exit;
+    if (empty($captcha)) {
+        $error = 'Por favor, confirma que no eres un robot.';
     } else {
-        $error = 'Usuario o contraseña incorrectos.';
+        $usersFile = dirname(__FILE__) . '/upload/users.txt';
+        $validUser = false;
+        
+        if (file_exists($usersFile)) {
+            $users = json_decode(file_get_contents($usersFile), true);
+            if (is_array($users)) {
+                foreach ($users as $u) {
+                    // Validar usuario (case-insensitive), clave exacta y que esté activo
+                    if (strtolower($u['usuario']) === strtolower($username) && $u['clave'] === $password && !empty($u['activo'])) {
+                        $validUser = true;
+                        break;
+                    }
+                }
+            }
+        } else {
+            // Fallback si no existe el archivo aún (primer ingreso)
+            if ($username === 'admin' && $password === 'admin') {
+                $validUser = true;
+            }
+        }
+
+        if ($validUser) {
+            $_SESSION['admin_logged_in'] = true;
+            header('Location: admin.php');
+            exit;
+        } else {
+            $error = 'Usuario o contraseña incorrectos, o cuenta inactiva.';
+        }
     }
 }
 
@@ -199,6 +224,54 @@ $logoPath = file_exists(__DIR__ . '/upload/logo-padma.jpg') ? 'upload/logo-padma
             transform: translateY(0);
         }
 
+        .captcha-container {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            user-select: none;
+        }
+
+        .captcha-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .captcha-checkbox {
+            width: 22px;
+            height: 22px;
+            accent-color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .captcha-text {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .captcha-brand {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.65rem;
+            color: var(--text-light);
+        }
+
+        .captcha-brand i {
+            font-size: 1.2rem;
+            color: #4285f4;
+            margin-bottom: 2px;
+        }
+
         .login-footer {
             margin-top: 24px;
             font-size: 0.85rem;
@@ -250,6 +323,17 @@ $logoPath = file_exists(__DIR__ . '/upload/logo-padma.jpg') ? 'upload/logo-padma
                     <div class="input-container">
                         <i class="fa-solid fa-lock"></i>
                         <input type="password" id="password" name="password" class="form-input" placeholder="Ingresa tu contraseña" required>
+                    </div>
+                </div>
+
+                <div class="captcha-container">
+                    <label class="captcha-left">
+                        <input type="checkbox" name="captcha_check" id="captcha_check" value="1" class="captcha-checkbox" required>
+                        <span class="captcha-text">No soy un robot</span>
+                    </label>
+                    <div class="captcha-brand">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <span>reCAPTCHA</span>
                     </div>
                 </div>
 

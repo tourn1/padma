@@ -1,0 +1,109 @@
+[
+    {
+        "id": "prod_6a918a87a946c3.67607148",
+        "nombre": "Roll on Concentrado Natural — Insomnio (Vata)",
+        "descripcion": "Reduce la ansiedad, el nerviosismo y el insomnio.\r\nCalmante, reduce la culpa, libera las emociones, aquieta la mente.",
+        "imagen": "roll_on_concentrado_natural_____insomnio__vata__1787923079.jpg",
+        "activo": true,
+        "destacado": true,
+        "orden": 0,
+        "imagenes": [
+            {
+                "archivo": "roll_on_concentrado_natural_____insomnio__vata__1787923079.jpg",
+                "nombre": "imagen 1"
+            },
+            {
+                "archivo": "roll_on_concentrado_natural_____insomnio__vata__1789010514_0.jpeg",
+                "nombre": "imagen 2"
+            }
+        ]
+    },
+    {
+        "id": "prod_6a918ab6b2a284.17229113",
+        "nombre": "Roll on Concentrado Natural — Energía (Kapha)",
+        "descripcion": "Reduce la depresión, fatiga y cansancio.\r\nReduce la ansiedad y al mismo tiempo energiza.\r\nRegula los humores y aumenta la autoconfianza.",
+        "imagen": "roll_on_concentrado_natural_____energ__a__kapha__1787923126.jpg",
+        "activo": true,
+        "imagenes": [
+            {
+                "archivo": "roll_on_concentrado_natural_____energ__a__kapha__1787923126.jpg",
+                "nombre": "Principal"
+            }
+        ],
+        "destacado": true,
+        "orden": 0
+    },
+    {
+        "id": "prod_6a918add92acb5.49600743",
+        "nombre": "Set de Roll on Concentrado Natural (Energía - Stress - Insomnio)",
+        "descripcion": "• Energía (Kapha): Reduce la depresión, fatiga y cansancio. Reduce la ansiedad y al mismo tiempo energiza. Regula los humores y aumenta la autoconfianza.\r\n• Stress (Pitta): Reduce el estrés, el embotamiento y cansancio mental. Libera las tensiones mentales y abre las vías respiratorias.\r\n• Insomnio (Vata): Reduce la ansiedad, el nerviosismo y el insomnio. Calmante, reduce la culpa, libera las emociones, aquieta la mente.",
+        "imagen": "set_de_roll_on_concentrado_natural__energ__a_-_stress_-_insomnio__1787923165.jpg",
+        "activo": true,
+        "imagenes": [
+            {
+                "archivo": "set_de_roll_on_concentrado_natural__energ__a_-_stress_-_insomnio__1787923165.jpg",
+                "nombre": "imagen uno"
+            }
+        ],
+        "destacado": false,
+        "orden": 0
+    },
+    {
+        "id": "prod_6a918b225dd042.92697100",
+        "nombre": "Aceites esenciales: Naranja, Eucalipto y Neroli",
+        "descripcion": "Junto al hornillo difusor de cerámica.\r\nNaranja:\r\nAyuda a aplacar los enojos e irritaciones, es antidepresivo, lo llaman anti conflicto. Se puede utilizar en difusores, hornillo a vela o eléctrico, inhalaciones, o diluido en aceite vehicular o crema sobre la piel.\r\nEucalipto:\r\nAdemás de su fresco aroma, tiene importantes propiedades anti bacterianas para el dolor e inflamación de las membranas de las mucosas del tracto respiratorio, tos, asma, bronquitis, dolor sinusal, e infecciones respiratorias. Ayuda a prepararse para los cambios bruscos de estación. Se puede utilizar en difusores, hornillo a vela o eléctrico, inhalaciones, o diluido en aceite vehicular o crema sobre la piel.\r\nNeroli:\r\nEstimula los afectos y renueva la seguridad en uno mismo. Estimula la renovación celular, nutre, hidrata, y tonifica la piel. Se puede utilizar en difusores, hornillo a vela o eléctrico, inhalaciones, o diluido en aceite vehicular o crema sobre la piel.",
+        "imagen": "aceites_esenciales__naranja__eucalipto_y_neroli_1787923234.jpg",
+        "activo": true
+    },
+    {
+        "id": "prod_6a918b905f7ba7.12744672",
+        "nombre": "Aceites esenciales: Bergamota, Menta y Geranio",
+        "descripcion": "Junto al hornillo difusor de cerámica.\r\nBergamota:\r\nEl aceite esencial de Bergamota reduce la ansiedad, alivia la depresión, mejora el humor, la aplicación del aceite diluido sobre la piel es capaz de reducir la presión arterial, tanto el alta como la baja. Se puede utilizar en difusores, hornillo a vela o eléctrico, inhalaciones, o diluido en aceite vehicular o crema sobre la piel.\r\nMenta:\r\nTiene efectos estimulantes y es usado para reducir el estrés y aliviar las tensiones y los nervios, así como para mejorar la memoria y la concentración. Por ello es muy común usarlo para el dolor de cabeza y las migrañas. Se puede utilizar en difusores, hornillo a vela o eléctrico, inhalaciones, o diluido en aceite vehicular o crema sobre la piel.\r\nGeranio:\r\nEs armonizante, ayuda a transitar los ciclos de la mujer. También es astringente, estimulante circulatorio ayuda a mejorar la retención de líquidos, apto para pieles grasas. Se puede utilizar en difusores, hornillo a vela o eléctrico, inhalaciones, o diluido en aceite vehicular o crema sobre la piel.",
+        "imagen": "aceites_esenciales__bergamota__menta_y_geranio_1787923344.jpg",
+        "activo": true
+    },
+    {
+        "id": "prod_6a918bddc3d185.19230479",
+        "nombre": "Línea completa de Aceites esenciales",
+        "descripcion": "En la foto se distinguen, de izquierda a derecha: Tea Tree, Lavanda, Eucalipto, Naranja, Menta, y otros tres frascos de la misma línea (etiqueta no legible con claridad en la imagen).\r\nTea Tree:\r\nDestaca por sus propiedades antisépticas, anti fúngicas y antibióticas. Es también cicatrizante y tiene propiedades calmantes y purificantes. Se puede utilizar en difusores, hornillo a vela o eléctrico, inhalaciones, o directamente sobre la piel.\r\nLavanda:\r\nSu aroma calma y aquieta los nervios, la ansiedad y el estrés ayudando a conciliar el sueño. Es el aceite ideal para tener en el botiquín de primeros auxilios en el caso de quemaduras, eczemas y alergias. Se puede utilizar en difusores, hornillo a vela o eléctrico, inhalaciones, o diluido en aceite vehicular o crema sobre la piel.\r\nEucalipto:\r\nAdemás de su fresco aroma, tiene importantes propiedades anti bacterianas para el dolor e inflamación de las membranas de las mucosas del tracto respiratorio, tos, asma, bronquitis, dolor sinusal, e infecciones respiratorias. Ayuda a prepararse para los cambios bruscos de estación.\r\nNaranja:\r\nAyuda a aplacar los enojos e irritaciones, es antidepresivo, lo llaman anti conflicto.\r\nMenta:\r\nTiene efectos estimulantes y es usado para reducir el estrés y aliviar las tensiones y los nervios, así como para mejorar la memoria y la concentración.\r\nNota: el Word incluye además Romero, Manzanilla, Tea Tree (repetido), Geranio, Jazmín, Neroli y Limón como parte de la línea de aceites esenciales; si podés confirmar cuáles son los 3 frascos restantes de la foto, agrego su descripción exacta.",
+        "imagen": "l__nea_completa_de_aceites_esenciales_1787923421.jpg",
+        "activo": true
+    },
+    {
+        "id": "prod_6a918c35567f51.60338484",
+        "nombre": "Body Splash: Mango y Maracuyá \/ Uva \/ Vainilla y Benjui",
+        "descripcion": "Mango-Maracuyá:\r\nContiene esencia de mango-maracuyá. Reduce el cansancio mental, libera tensiones.\r\nUva:\r\nContiene esencia de uva. Activa el sistema nervioso reduciendo el cansancio, la fatiga y el agotamiento. Suministra energía y vitalidad. Alivia los estados de bloqueos psico-emocionales.\r\nVainilla y Benjui:\r\nContiene esencia de benjui y vainilla. Reduce la ansiedad, dando calma, paz, prosperidad.",
+        "imagen": "body_splash__mango_y_maracuy_____uva___vainilla_y_benjui_1787923509.jpg",
+        "activo": true,
+        "imagenes": [
+            {
+                "archivo": "body_splash__mango_y_maracuy_____uva___vainilla_y_benjui_1787923509.jpg",
+                "nombre": "Principal"
+            }
+        ],
+        "destacado": true,
+        "orden": 0
+    },
+    {
+        "id": "prod_6a918c695cd795.67321831",
+        "nombre": "Splash Meditación",
+        "descripcion": "Contiene esencias puras de lavanda y sándalo.\r\nLa lavanda calma la energía del espacio y el individuo, el sándalo proyecta un lugar de tranquilidad, ayudando a mantenerse despierto. Ideal para la meditación.",
+        "imagen": "splash_meditaci__n_1787923561.jpg",
+        "activo": true
+    },
+    {
+        "id": "prod_6a918ca0c5a792.66925580",
+        "nombre": "Splash Sueña",
+        "descripcion": "Contiene esencias de lavanda, melisa y manzanilla.\r\nInduce al descanso relajando, sacando tensión nerviosa, sedante natural, ayuda al buen dormir. Ideal para niños a partir de los 3 meses. Se utiliza rociando la almohada antes de dormir.",
+        "imagen": "splash_sue__a_1787923616.jpg",
+        "activo": true
+    },
+    {
+        "id": "prod_6a91880534fe31.81267945",
+        "nombre": "Roll on Concentrado Natural — Anti-estrés (Pitta)",
+        "descripcion": "Reduce el estrés, el embotamiento y cansancio mental.\r\nLibera las tensiones mentales y abre las vías respiratorias.",
+        "imagen": "roll_on_concentrado_natural_____anti-estr__s__pitta__1787923036.jpg",
+        "activo": true,
+        "orden": 0
+    }
+]

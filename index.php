@@ -1,6 +1,6 @@
 <?php
-$textFile = __DIR__ . '/admin/text.txt';
-$uploadDir = __DIR__ . '/admin/upload/';
+$textFile = dirname(__FILE__) . '/admin/text.txt';
+$uploadDir = dirname(__FILE__) . '/admin/upload/';
 
 $defaultTexts = [
     "brand_name" => "PADMA YOGA",
@@ -57,7 +57,8 @@ $defaultTexts = [
     "contact_btn" => "Contactar vía Instagram",
     "link_contact_btn" => "https://www.instagram.com/padma.y.yoga/",
     "link_contact_insta" => "https://www.instagram.com/padma.y.yoga/",
-    "link_contact_wa" => "https://wa.me/"
+    "link_contact_wa" => "https://wa.me/",
+    "footer_text" => "© 2026 Padma Yoga. Todos los derechos reservados."
 ];
 
 $texts = $defaultTexts;
@@ -69,7 +70,7 @@ if (file_exists($textFile)) {
 }
 
 function getImgUrl($filename) {
-    $uploadPath = __DIR__ . '/admin/upload/' . $filename;
+    $uploadPath = dirname(__FILE__) . '/admin/upload/' . $filename;
     if (file_exists($uploadPath)) {
         return 'admin/upload/' . $filename . '?v=' . filemtime($uploadPath);
     }
@@ -79,6 +80,29 @@ function getImgUrl($filename) {
 function e($str) {
     return htmlspecialchars($str ?? '', ENT_QUOTES, 'UTF-8');
 }
+
+// Cargar catálogo para la home (solo los 3 primeros)
+$catalogFile = dirname(__FILE__) . '/admin/upload/catalog.txt';
+$heroProducts = [];
+if (file_exists($catalogFile)) {
+    $content = file_get_contents($catalogFile);
+    $savedProducts = json_decode($content, true);
+    if (is_array($savedProducts)) {
+        // Ordenar por el campo 'orden'
+        usort($savedProducts, function($a, $b) {
+            return ($a['orden'] ?? 0) <=> ($b['orden'] ?? 0);
+        });
+        foreach ($savedProducts as $sp) {
+            // Mostrar solo si está activo y es destacado
+            $isActive = !isset($sp['activo']) || $sp['activo'] === true;
+            $isDestacado = isset($sp['destacado']) && $sp['destacado'] === true;
+            if ($isActive && $isDestacado) {
+                $heroProducts[] = $sp;
+                if (count($heroProducts) >= 3) break;
+            }
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -86,7 +110,40 @@ function e($str) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Padma Yoga & Productos Naturales | Bienestar Holístico</title>
+    <title>Padma Yoga & Productos Naturales | Bienestar Holístico & Cosmética Orgánica</title>
+    
+    <!-- Primary Meta Tags (SEO & SEM) -->
+    <meta name="description" content="Descubre Padma Yoga: productos 100% naturales, cosmética botánica, aceites esenciales puros, sahumerios artesanales y clases de yoga (Vinyasa, Hatha, Meditación). Reconecta con tu bienestar holístico.">
+    <meta name="keywords" content="padma yoga, productos naturales, cosmética natural, aceites esenciales, sahumerios artesanales, clases de yoga, vinyasa flow, hatha yoga, meditación, bienestar holístico, aromaterapia">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Padma Yoga">
+    
+    <!-- Open Graph / Facebook / WhatsApp (Social SEM) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Padma Yoga & Productos Naturales | Bienestar Holístico">
+    <meta property="og:description" content="Cosmética botánica orgánica, aromaterapia artesanal y clases de yoga para reconectar con tu bienestar diario.">
+    <meta property="og:image" content="<?php echo getImgUrl('logo-padma.jpg'); ?>">
+    
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Padma Yoga & Productos Naturales | Bienestar Holístico">
+    <meta name="twitter:description" content="Productos 100% naturales y clases de yoga diseñadas para reconectar con tu esencia.">
+    <meta name="twitter:image" content="<?php echo getImgUrl('logo-padma.jpg'); ?>">
+
+    <!-- Schema.org JSON-LD (Structured Data for Google) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HealthAndBeautyBusiness",
+      "name": "Padma Yoga & Productos Naturales",
+      "description": "Productos orgánicos, cosmética artesanal, aceites esenciales y clases de yoga para el bienestar holístico.",
+      "image": "<?php echo getImgUrl('logo-padma.jpg'); ?>",
+      "sameAs": [
+        "https://www.instagram.com/padma.y.yoga/"
+      ]
+    }
+    </script>
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -115,7 +172,7 @@ function e($str) {
                 <li><a href="#nosotros" class="nav-link"><?php echo e($texts['nav_nosotros']); ?></a></li>
                 <li><a href="#clases" class="nav-link"><?php echo e($texts['nav_clases']); ?></a></li>
                 <li><a href="#comunidad" class="nav-link"><?php echo e($texts['nav_comunidad']); ?></a></li>
-                <li><a href="#productos" class="btn-nav"><?php echo e($texts['nav_btn_catalogo']); ?></a></li>
+                <li><a href="catalogo.php" class="btn-nav"><?php echo e($texts['nav_btn_catalogo']); ?></a></li>
             </ul>
         </nav>
     </header>
@@ -148,53 +205,76 @@ function e($str) {
         </div>
         
         <div class="products-grid">
-            <!-- Producto 1 -->
-            <div class="product-card reveal">
-                <span class="product-badge"><?php echo e($texts['p1_badge']); ?></span>
-                <div class="product-img">
-                    <img src="<?php echo getImgUrl('producto-aceites.jpg'); ?>" alt="<?php echo e($texts['p1_title']); ?>">
+            <?php if (!empty($heroProducts)): ?>
+                <?php foreach ($heroProducts as $index => $prod): ?>
+                    <div class="product-card reveal">
+                        <!-- Usamos un badge genérico por defecto, ya que el CRUD no lo tiene actualmente -->
+                        <span class="product-badge">100% Natural</span>
+                        <div class="product-img">
+                            <?php if (!empty($prod['imagen']) && file_exists(dirname(__FILE__) . '/assets/img/catalogo/' . $prod['imagen'])): ?>
+                                <img src="assets/img/catalogo/<?php echo e($prod['imagen']); ?>" alt="<?php echo e($prod['nombre']); ?>">
+                            <?php else: ?>
+                                <img src="<?php echo getImgUrl('producto-aceites.jpg'); ?>" alt="<?php echo e($prod['nombre']); ?>">
+                            <?php endif; ?>
+                        </div>
+                        <div class="product-info">
+                            <h3><?php echo e($prod['nombre']); ?></h3>
+                            <div style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1.5rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                                <?php echo strip_tags($prod['descripcion']); ?>
+                            </div>
+                            <a href="https://wa.me/?text=<?php echo urlencode('Hola! Quiero consultar sobre ' . $prod['nombre']); ?>" target="_blank" class="btn-consult" style="margin-top: auto;">
+                                <i class="fa-brands fa-whatsapp"></i> Consultar Disponibilidad
+                            </a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <!-- Fallback a productos hardcodeados si el catálogo está vacío -->
+                <!-- Producto 1 -->
+                <div class="product-card reveal">
+                    <span class="product-badge"><?php echo e($texts['p1_badge']); ?></span>
+                    <div class="product-img">
+                        <img src="<?php echo getImgUrl('producto-aceites.jpg'); ?>" alt="<?php echo e($texts['p1_title']); ?>">
+                    </div>
+                    <div class="product-info">
+                        <h3><?php echo e($texts['p1_title']); ?></h3>
+                        <p><?php echo e($texts['p1_desc']); ?></p>
+                        <a href="<?php echo e($texts['link_p1_wa']); ?>" target="_blank" class="btn-consult" style="margin-top: auto;">
+                            <i class="fa-brands fa-whatsapp"></i> <?php echo e($texts['p1_btn']); ?>
+                        </a>
+                    </div>
                 </div>
-                <div class="product-info">
-                    <h3><?php echo e($texts['p1_title']); ?></h3>
-                    <p><?php echo e($texts['p1_desc']); ?></p>
-                    <a href="<?php echo e($texts['link_p1_wa']); ?>" target="_blank" class="btn-consult">
-                        <i class="fa-brands fa-whatsapp"></i> <?php echo e($texts['p1_btn']); ?>
 
-                    </a>
+                <!-- Producto 2 -->
+                <div class="product-card reveal">
+                    <span class="product-badge"><?php echo e($texts['p2_badge']); ?></span>
+                    <div class="product-img">
+                        <img src="<?php echo getImgUrl('producto-cremas.jpg'); ?>" alt="<?php echo e($texts['p2_title']); ?>">
+                    </div>
+                    <div class="product-info">
+                        <h3><?php echo e($texts['p2_title']); ?></h3>
+                        <p><?php echo e($texts['p2_desc']); ?></p>
+                        <a href="<?php echo e($texts['link_p2_wa']); ?>" target="_blank" class="btn-consult" style="margin-top: auto;">
+                            <i class="fa-brands fa-whatsapp"></i> <?php echo e($texts['p2_btn']); ?>
+                        </a>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Producto 2 -->
-            <div class="product-card reveal">
-                <span class="product-badge"><?php echo e($texts['p2_badge']); ?></span>
-                <div class="product-img">
-                    <img src="<?php echo getImgUrl('producto-cremas.jpg'); ?>" alt="<?php echo e($texts['p2_title']); ?>">
+                <!-- Producto 3 -->
+                <div class="product-card reveal">
+                    <span class="product-badge"><?php echo e($texts['p3_badge']); ?></span>
+                    <div class="product-img">
+                        <img src="<?php echo getImgUrl('producto-sahumerios.jpg'); ?>" alt="<?php echo e($texts['p3_title']); ?>">
+                    </div>
+                    <div class="product-info">
+                        <h3><?php echo e($texts['p3_title']); ?></h3>
+                        <p><?php echo e($texts['p3_desc']); ?></p>
+                        <a href="<?php echo e($texts['link_p3_wa']); ?>" target="_blank" class="btn-consult" style="margin-top: auto;">
+                            <i class="fa-brands fa-whatsapp"></i> <?php echo e($texts['p3_btn']); ?>
+                        </a>
+                    </div>
                 </div>
-                <div class="product-info">
-                    <h3><?php echo e($texts['p2_title']); ?></h3>
-                    <p><?php echo e($texts['p2_desc']); ?></p>
-                    <a href="<?php echo e($texts['link_p2_wa']); ?>" target="_blank" class="btn-consult">
-                        <i class="fa-brands fa-whatsapp"></i> <?php echo e($texts['p2_btn']); ?>
-
-                    </a>
-                </div>
-            </div>
-
-            <!-- Producto 3 -->
-            <div class="product-card reveal">
-                <span class="product-badge"><?php echo e($texts['p3_badge']); ?></span>
-                <div class="product-img">
-                    <img src="<?php echo getImgUrl('producto-sahumerios.jpg'); ?>" alt="<?php echo e($texts['p3_title']); ?>">
-                </div>
-                <div class="product-info">
-                    <h3><?php echo e($texts['p3_title']); ?></h3>
-                    <p><?php echo e($texts['p3_desc']); ?></p>
-                    <a href="<?php echo e($texts['link_p3_wa']); ?>" target="_blank" class="btn-consult">
-                        <i class="fa-brands fa-whatsapp"></i> <?php echo e($texts['p3_btn']); ?>
-
-                    </a>
-                </div>
-            </div>
+            <?php endif; ?>
         </div>
     </section>
 
@@ -221,7 +301,11 @@ function e($str) {
         <div class="classes-grid">
             <div class="class-card reveal">
                 <div class="class-img">
-                    <img src="<?php echo getImgUrl('clase-vinyasa.jpg'); ?>" alt="<?php echo e($texts['c1_title']); ?>">
+                    <?php if (($texts['c1_type'] ?? 'image') === 'video' && !empty($texts['c1_video_file'])): ?>
+                        <video src="<?php echo getImgUrl($texts['c1_video_file']); ?>" autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover; object-position: 50% <?php echo e($texts['c1_img_pos'] ?? '50'); ?>%;"></video>
+                    <?php else: ?>
+                        <img src="<?php echo getImgUrl('clase-vinyasa.jpg'); ?>" alt="<?php echo e($texts['c1_title']); ?>" style="object-position: 50% <?php echo e($texts['c1_img_pos'] ?? '50'); ?>%;">
+                    <?php endif; ?>
                 </div>
                 <div class="class-info">
                     <h3><?php echo e($texts['c1_title']); ?></h3>
@@ -230,7 +314,11 @@ function e($str) {
             </div>
             <div class="class-card reveal">
                 <div class="class-img">
-                    <img src="<?php echo getImgUrl('clase-hatha.jpg'); ?>" alt="<?php echo e($texts['c2_title']); ?>">
+                    <?php if (($texts['c2_type'] ?? 'image') === 'video' && !empty($texts['c2_video_file'])): ?>
+                        <video src="<?php echo getImgUrl($texts['c2_video_file']); ?>" autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover; object-position: 50% <?php echo e($texts['c2_img_pos'] ?? '50'); ?>%;"></video>
+                    <?php else: ?>
+                        <img src="<?php echo getImgUrl('clase-hatha.jpg'); ?>" alt="<?php echo e($texts['c2_title']); ?>" style="object-position: 50% <?php echo e($texts['c2_img_pos'] ?? '50'); ?>%;">
+                    <?php endif; ?>
                 </div>
                 <div class="class-info">
                     <h3><?php echo e($texts['c2_title']); ?></h3>
@@ -239,7 +327,11 @@ function e($str) {
             </div>
             <div class="class-card reveal">
                 <div class="class-img">
-                    <img src="<?php echo getImgUrl('clase-meditacion.jpg'); ?>" alt="<?php echo e($texts['c3_title']); ?>">
+                    <?php if (($texts['c3_type'] ?? 'image') === 'video' && !empty($texts['c3_video_file'])): ?>
+                        <video src="<?php echo getImgUrl($texts['c3_video_file']); ?>" autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover; object-position: 50% <?php echo e($texts['c3_img_pos'] ?? '50'); ?>%;"></video>
+                    <?php else: ?>
+                        <img src="<?php echo getImgUrl('clase-meditacion.jpg'); ?>" alt="<?php echo e($texts['c3_title']); ?>" style="object-position: 50% <?php echo e($texts['c3_img_pos'] ?? '50'); ?>%;">
+                    <?php endif; ?>
                 </div>
                 <div class="class-info">
                     <h3><?php echo e($texts['c3_title']); ?></h3>
@@ -284,8 +376,8 @@ function e($str) {
 
         </a>
         <div class="social-links">
-            <a href="<?php echo e($texts['link_contact_insta']); ?>" target="_blank" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
-            <a href="<?php echo e($texts['link_contact_wa']); ?>" target="_blank" class="social-btn"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="<?php echo e($texts['link_contact_insta']); ?>" target="_blank" class="social-btn" aria-label="Visita nuestro Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="<?php echo e($texts['link_contact_wa']); ?>" target="_blank" class="social-btn" aria-label="Contactar por WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
         </div>
     </section>
 

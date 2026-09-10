@@ -16,8 +16,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'logout') {
 }
 
 // Configuración de rutas y persistencia
-$textFile = __DIR__ . '/text.txt';
-$uploadDir = __DIR__ . '/upload/';
+$textFile = dirname(__FILE__) . '/text.txt';
+$uploadDir = dirname(__FILE__) . '/upload/';
 
 if (!file_exists($uploadDir)) {
     mkdir($uploadDir, 0755, true);
@@ -68,6 +68,15 @@ $defaultTexts = [
     "c2_desc" => "Práctica consciente enfocada en la alineación, sostén de posturas y búsqueda de calma en el movimiento.",
     "c3_title" => "Pranayama & Meditación",
     "c3_desc" => "Sesiones guiadas para calmar el sistema nervioso, liberar el estrés y profundizar en el autoconocimiento.",
+    "c1_type" => "image",
+    "c1_img_pos" => "50",
+    "c1_video_file" => "",
+    "c2_type" => "image",
+    "c2_img_pos" => "50",
+    "c2_video_file" => "",
+    "c3_type" => "image",
+    "c3_img_pos" => "50",
+    "c3_video_file" => "",
     "insta_title" => "Comunidad @padma.y.yoga",
     "insta_desc" => "Descubre más detalles de nuestros productos naturales, tips de bienestar y novedades en Instagram.",
     "link_insta_1" => "https://www.instagram.com/padma.y.yoga/",
@@ -79,7 +88,8 @@ $defaultTexts = [
     "contact_btn" => "Contactar vía Instagram",
     "link_contact_btn" => "https://www.instagram.com/padma.y.yoga/",
     "link_contact_insta" => "https://www.instagram.com/padma.y.yoga/",
-    "link_contact_wa" => "https://wa.me/"
+    "link_contact_wa" => "https://wa.me/",
+    "footer_text" => "© 2026 Padma Yoga. Todos los derechos reservados."
 ];
 
 $texts = $defaultTexts;
@@ -106,31 +116,120 @@ $imageMap = [
     'img_i4' => 'insta-4.jpg'
 ];
 
-$message = '';
+$successMessage = '';
+$errorMessages = [];
 
 // Procesamiento de formulario POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $hasErrors = false;
+
     // 1. Guardar Textos y Links
     if (isset($_POST['texts']) && is_array($_POST['texts'])) {
         foreach ($_POST['texts'] as $k => $v) {
             $texts[$k] = trim($v);
         }
-        file_put_contents($textFile, json_encode($texts, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+
+        // Validar permisos de escritura en text.txt (o en el directorio si no existe)
+        $isWritable = false;
+        if (file_exists($textFile)) {
+            $isWritable = is_writable($textFile);
+        } else {
+            $isWritable = is_writable(dirname($textFile));
+        }
+
+        if ($isWritable) {
+            $jsonContent = json_encode($texts, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+            if ($jsonContent === false) {
+                $errorMessages[] = "Error al formatear los campos como JSON.";
+                $hasErrors = true;
+            } else {
+                $bytes = file_put_contents($textFile, $jsonContent);
+                if ($bytes === false) {
+                    $errorMessages[] = "No se pudo escribir en el archivo 'text.txt'. Verifique el espacio en disco.";
+                    $hasErrors = true;
+                }
+            }
+        } else {
+            $pathToCheck = file_exists($textFile) ? $textFile : dirname($textFile);
+            $errorMessages[] = "Error de permisos: El servidor no tiene permisos para escribir en '" . basename($pathToCheck) . "' (Ruta: " . realpath($pathToCheck) . "). Por favor, otorgue permisos de escritura (ej. CHMOD 664 o 775/777).";
+            $hasErrors = true;
+        }
     }
 
     // 2. Guardar Imágenes
     $uploadedCount = 0;
     foreach ($imageMap as $inputKey => $originalFilename) {
-        if (isset($_FILES[$inputKey]) && $_FILES[$inputKey]['error'] === UPLOAD_ERR_OK) {
-            $tmpPath = $_FILES[$inputKey]['tmp_name'];
-            $targetPath = $uploadDir . $originalFilename;
-            if (move_uploaded_file($tmpPath, $targetPath)) {
-                $uploadedCount++;
+        if (isset($_FILES[$inputKey])) {
+            $fileError = $_FILES[$inputKey]['error'];
+            if ($fileError === UPLOAD_ERR_OK) {
+                // Verificar permisos del directorio de subidas
+                if (!is_writable($uploadDir)) {
+                    $errorMessages[] = "Error de permisos: La carpeta de subidas 'upload/' no tiene permisos de escritura (Ruta: " . realpath($uploadDir) . ").";
+                    $hasErrors = true;
+                    continue;
+                }
+
+                $tmpPath = $_FILES[$inputKey]['tmp_name'];
+                $targetPath = $uploadDir . $originalFilename;
+
+                $isClassImg = in_array($inputKey, ['img_c1', 'img_c2', 'img_c3']);
+                $ext = strtolower(pathinfo($_FILES[$inputKey]['name'], PATHINFO_EXTENSION));
+                $isVideo = in_array($ext, ['mp4', 'webm', 'mov']);
+
+                if ($isClassImg && $isVideo) {
+                    $classNum = substr($inputKey, 5); // '1', '2', '3'
+                    $videoFilename = pathinfo($originalFilename, PATHINFO_FILENAME) . '.' . $ext;
+                    $targetPath = $uploadDir . $videoFilename;
+
+                    if (move_uploaded_file($tmpPath, $targetPath)) {
+                        $uploadedCount++;
+                        $texts['c' . $classNum . '_type'] = 'video';
+                        $texts['c' . $classNum . '_video_file'] = $videoFilename;
+                        file_put_contents($textFile, json_encode($texts, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+                    } else {
+                        $errorMessages[] = "No se pudo guardar el video para '" . e($inputKey) . "' en el servidor.";
+                        $hasErrors = true;
+                    }
+                } else {
+                    // Validar que sea una imagen válida
+                    $imageInfo = @getimagesize($tmpPath);
+                    if ($imageInfo === false) {
+                        $errorMessages[] = "El archivo subido para '" . e($inputKey) . "' no es una imagen o video válido.";
+                        $hasErrors = true;
+                        continue;
+                    }
+
+                    if (move_uploaded_file($tmpPath, $targetPath)) {
+                        $uploadedCount++;
+                        if ($isClassImg) {
+                            $classNum = substr($inputKey, 5);
+                            $texts['c' . $classNum . '_type'] = 'image';
+                            file_put_contents($textFile, json_encode($texts, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+                        }
+                    } else {
+                        $errorMessages[] = "No se pudo guardar la imagen '" . e($originalFilename) . "' en el servidor.";
+                        $hasErrors = true;
+                    }
+                }
+            } elseif ($fileError !== UPLOAD_ERR_NO_FILE) {
+                $uploadErrorMsg = [
+                    UPLOAD_ERR_INI_SIZE   => "El archivo es demasiado grande. El límite del servidor es " . ini_get('upload_max_filesize') . ". Para videos, comprimí el archivo o aumentá el límite en php.ini / .htaccess.",
+                    UPLOAD_ERR_FORM_SIZE  => "El archivo supera el tamaño máximo permitido por el formulario.",
+                    UPLOAD_ERR_PARTIAL    => "El archivo se subió de forma incompleta. Intentalo de nuevo.",
+                    UPLOAD_ERR_NO_TMP_DIR => "Error interno: falta el directorio temporal del servidor.",
+                    UPLOAD_ERR_CANT_WRITE => "Error interno: no se puede escribir en el disco del servidor.",
+                    UPLOAD_ERR_EXTENSION  => "Una extensión de PHP bloqueó la subida del archivo.",
+                ];
+                $msg = $uploadErrorMsg[$fileError] ?? "Error desconocido al subir el archivo (código PHP: $fileError).";
+                $errorMessages[] = "Error en '". e($inputKey) . "': " . $msg;
+                $hasErrors = true;
             }
         }
     }
 
-    $message = "¡Cambios guardados con éxito! " . ($uploadedCount > 0 ? "($uploadedCount imagen(es) actualizada(s))" : "");
+    if (!$hasErrors) {
+        $successMessage = "¡Cambios guardados con éxito! " . ($uploadedCount > 0 ? "($uploadedCount imagen(es) actualizada(s))" : "");
+    }
 }
 
 // Helper para obtener URL de imagen
@@ -268,6 +367,12 @@ function e($str) {
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
 
+        .admin-alert.admin-alert-danger {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
         /* Estilos de inputs editables inline */
         .admin-input, .admin-textarea {
             width: 100%;
@@ -396,6 +501,109 @@ function e($str) {
             opacity: 0;
             cursor: pointer;
         }
+
+        /* Ajuste específico para el botón de upload en las clases (para no bloquear el arrastre) */
+        .class-card .admin-img-overlay {
+            top: auto;
+            bottom: 12px;
+            right: 12px;
+            left: auto;
+            background: rgba(30, 41, 59, 0.85);
+            border-radius: 8px;
+            padding: 8px 12px;
+            flex-direction: row;
+            gap: 8px;
+            opacity: 0.9;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .class-card .admin-img-container:hover .admin-img-overlay {
+            opacity: 1;
+            background: rgba(30, 41, 59, 1);
+        }
+
+        .class-card .admin-img-overlay i {
+            font-size: 1.1rem;
+            margin-bottom: 0;
+        }
+
+        .class-card .admin-img-overlay span {
+            background: transparent;
+            padding: 0;
+        }
+
+        /* ---- Ajuste de posición por arrastre directo sobre la imagen ---- */
+        .class-img {
+            overflow: hidden !important;
+            position: relative;
+        }
+
+        /* Imagen/video draggeable */
+        .drag-media {
+            width: 100%;
+            height: 100% !important;
+            object-fit: cover;
+            cursor: ns-resize;
+            user-select: none;
+            -webkit-user-drag: none;
+            transition: outline 0.2s !important;
+        }
+
+        .drag-media.dragging {
+            outline: 2px solid #38a169;
+            cursor: grabbing;
+            transition: none !important;
+        }
+
+        /* Tooltip flotante que muestra la posición mientras se arrastra */
+        .drag-tooltip {
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(30, 41, 59, 0.9);
+            color: #68d391;
+            font-size: 0.75rem;
+            font-weight: 700;
+            font-family: 'Plus Jakarta Sans', monospace;
+            padding: 4px 12px;
+            border-radius: 20px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            z-index: 20;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+            border: 1px solid rgba(56,161,105,0.4);
+        }
+
+        .drag-tooltip.visible {
+            opacity: 1;
+        }
+
+        /* Hint de arrastre al hacer hover */
+        .drag-hint {
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(30, 41, 59, 0.75);
+            color: #e2e8f0;
+            font-size: 0.68rem;
+            font-weight: 500;
+            padding: 3px 10px;
+            border-radius: 12px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            z-index: 20;
+            white-space: nowrap;
+        }
+
+        .admin-img-container:hover .drag-hint {
+            opacity: 1;
+        }
     </style>
 </head>
 
@@ -410,6 +618,15 @@ function e($str) {
                 <span>Modo Edición - Padma Admin</span>
             </div>
             <div class="admin-bar-actions">
+                <a href="admin.php" class="btn-admin-view" style="font-weight: bold; border-bottom: 2px solid var(--admin-accent); padding-bottom: 4px;">
+                    <i class="fa-solid fa-file-pen"></i> Contenido Web
+                </a>
+                <a href="products.php" class="btn-admin-view">
+                    <i class="fa-solid fa-boxes-stacked"></i> Catálogo de Productos
+                </a>
+                <a href="users.php" class="btn-admin-view">
+                    <i class="fa-solid fa-users"></i> Usuarios
+                </a>
                 <a href="../index.php" target="_blank" class="btn-admin-view">
                     <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver Sitio
                 </a>
@@ -422,9 +639,22 @@ function e($str) {
             </div>
         </div>
 
-        <?php if (!empty($message)): ?>
+        <?php if (!empty($successMessage)): ?>
             <div class="admin-alert">
-                <i class="fa-solid fa-circle-check"></i> <?php echo e($message); ?>
+                <i class="fa-solid fa-circle-check"></i> <?php echo e($successMessage); ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if (!empty($errorMessages)): ?>
+            <div class="admin-alert admin-alert-danger" style="background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;">
+                <div style="font-weight: bold; margin-bottom: 5px;">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Se encontraron errores al guardar:
+                </div>
+                <ul style="text-align: left; margin: 0 0 0 20px; padding: 0;">
+                    <?php foreach ($errorMessages as $err): ?>
+                        <li><?php echo e($err); ?></li>
+                    <?php endforeach; ?>
+                </ul>
             </div>
         <?php endif; ?>
 
@@ -509,103 +739,8 @@ function e($str) {
             </div>
 
             <div class="products-grid">
-                <!-- Producto 1 -->
-                <div class="product-card">
-                    <span class="product-badge">
-                        <input type="text" name="texts[p1_badge]" value="<?php echo e($texts['p1_badge']); ?>" class="admin-input" style="width: 110px; text-align: center;">
-                    </span>
-                    <div class="product-img">
-                        <div class="admin-img-container">
-                            <img src="<?php echo getAdminImgUrl('producto-aceites.jpg'); ?>" id="preview_p1" alt="Aceites Esenciales">
-                            <div class="admin-img-overlay">
-                                <i class="fa-solid fa-camera"></i>
-                                <span>Cambiar Imagen</span>
-                                <input type="file" name="img_p1" accept="image/*" class="admin-file-input" onchange="previewImg(this, 'preview_p1')">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>
-                            <input type="text" name="texts[p1_title]" value="<?php echo e($texts['p1_title']); ?>" class="admin-input" style="font-size: inherit;">
-                        </h3>
-                        <p>
-                            <textarea name="texts[p1_desc]" class="admin-textarea"><?php echo e($texts['p1_desc']); ?></textarea>
-                        </p>
-                        <div class="btn-consult" style="display: inline-flex; align-items: center; gap: 8px; width: 100%; box-sizing: border-box;">
-                            <i class="fa-brands fa-whatsapp"></i>
-                            <input type="text" name="texts[p1_btn]" value="<?php echo e($texts['p1_btn']); ?>" class="admin-input">
-                        </div>
-                        <div class="admin-url-group">
-                            <i class="fa-solid fa-link" title="Enlace Botón WhatsApp / Consulta"></i>
-                            <input type="text" name="texts[link_p1_wa]" value="<?php echo e($texts['link_p1_wa']); ?>" class="admin-input-url" placeholder="URL WhatsApp / Enlace">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Producto 2 -->
-                <div class="product-card">
-                    <span class="product-badge">
-                        <input type="text" name="texts[p2_badge]" value="<?php echo e($texts['p2_badge']); ?>" class="admin-input" style="width: 100px; text-align: center;">
-                    </span>
-                    <div class="product-img">
-                        <div class="admin-img-container">
-                            <img src="<?php echo getAdminImgUrl('producto-cremas.jpg'); ?>" id="preview_p2" alt="Cremas Botanicas">
-                            <div class="admin-img-overlay">
-                                <i class="fa-solid fa-camera"></i>
-                                <span>Cambiar Imagen</span>
-                                <input type="file" name="img_p2" accept="image/*" class="admin-file-input" onchange="previewImg(this, 'preview_p2')">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>
-                            <input type="text" name="texts[p2_title]" value="<?php echo e($texts['p2_title']); ?>" class="admin-input" style="font-size: inherit;">
-                        </h3>
-                        <p>
-                            <textarea name="texts[p2_desc]" class="admin-textarea"><?php echo e($texts['p2_desc']); ?></textarea>
-                        </p>
-                        <div class="btn-consult" style="display: inline-flex; align-items: center; gap: 8px; width: 100%; box-sizing: border-box;">
-                            <i class="fa-brands fa-whatsapp"></i>
-                            <input type="text" name="texts[p2_btn]" value="<?php echo e($texts['p2_btn']); ?>" class="admin-input">
-                        </div>
-                        <div class="admin-url-group">
-                            <i class="fa-solid fa-link" title="Enlace Botón WhatsApp / Consulta"></i>
-                            <input type="text" name="texts[link_p2_wa]" value="<?php echo e($texts['link_p2_wa']); ?>" class="admin-input-url" placeholder="URL WhatsApp / Enlace">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Producto 3 -->
-                <div class="product-card">
-                    <span class="product-badge">
-                        <input type="text" name="texts[p3_badge]" value="<?php echo e($texts['p3_badge']); ?>" class="admin-input" style="width: 110px; text-align: center;">
-                    </span>
-                    <div class="product-img">
-                        <div class="admin-img-container">
-                            <img src="<?php echo getAdminImgUrl('producto-sahumerios.jpg'); ?>" id="preview_p3" alt="Sahumerios Naturales">
-                            <div class="admin-img-overlay">
-                                <i class="fa-solid fa-camera"></i>
-                                <span>Cambiar Imagen</span>
-                                <input type="file" name="img_p3" accept="image/*" class="admin-file-input" onchange="previewImg(this, 'preview_p3')">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>
-                            <input type="text" name="texts[p3_title]" value="<?php echo e($texts['p3_title']); ?>" class="admin-input" style="font-size: inherit;">
-                        </h3>
-                        <p>
-                            <textarea name="texts[p3_desc]" class="admin-textarea"><?php echo e($texts['p3_desc']); ?></textarea>
-                        </p>
-                        <div class="btn-consult" style="display: inline-flex; align-items: center; gap: 8px; width: 100%; box-sizing: border-box;">
-                            <i class="fa-brands fa-whatsapp"></i>
-                            <input type="text" name="texts[p3_btn]" value="<?php echo e($texts['p3_btn']); ?>" class="admin-input">
-                        </div>
-                        <div class="admin-url-group">
-                            <i class="fa-solid fa-link" title="Enlace Botón WhatsApp / Consulta"></i>
-                            <input type="text" name="texts[link_p3_wa]" value="<?php echo e($texts['link_p3_wa']); ?>" class="admin-input-url" placeholder="URL WhatsApp / Enlace">
-                        </div>
-                    </div>
+                <div class="admin-alert" style="grid-column: 1 / -1; margin-top: 20px;">
+                    <i class="fa-solid fa-circle-info"></i> Los productos mostrados en la página de inicio se gestionan desde el <a href="products.php" style="color: inherit; text-decoration: underline; font-weight: bold;">Catálogo de Productos</a>. Se mostrarán automáticamente los 3 productos destacados.
                 </div>
             </div>
         </section>
@@ -648,14 +783,22 @@ function e($str) {
                 </p>
             </div>
             <div class="classes-grid">
+                <!-- Clase 1 -->
                 <div class="class-card">
                     <div class="class-img">
-                        <div class="admin-img-container">
-                            <img src="<?php echo getAdminImgUrl('clase-vinyasa.jpg'); ?>" id="preview_c1" alt="Vinyasa Flow">
+                        <div class="admin-img-container" style="position: relative; height: 100%;">
+                            <?php if (($texts['c1_type'] ?? 'image') === 'video' && !empty($texts['c1_video_file'])): ?>
+                                <video id="preview_c1" src="<?php echo getAdminImgUrl($texts['c1_video_file']); ?>" autoplay loop muted playsinline class="drag-media" draggable="false" data-pos-input="pos_c1_img_pos"></video>
+                            <?php else: ?>
+                                <img id="preview_c1" src="<?php echo getAdminImgUrl('clase-vinyasa.jpg'); ?>" alt="Vinyasa Flow" class="drag-media" draggable="false" data-pos-input="pos_c1_img_pos" style="object-position: 50% <?php echo e($texts['c1_img_pos'] ?? '50'); ?>%;">
+                            <?php endif; ?>
+                            <input type="hidden" id="pos_c1_img_pos" name="texts[c1_img_pos]" value="<?php echo e($texts['c1_img_pos'] ?? '50'); ?>">
+                            <div class="drag-tooltip" id="tooltip_c1">↕ <?php echo e($texts['c1_img_pos'] ?? '50'); ?>%</div>
+                            <div class="drag-hint">↕ Arrastrar para ajustar</div>
                             <div class="admin-img-overlay">
                                 <i class="fa-solid fa-camera"></i>
-                                <span>Cambiar Imagen</span>
-                                <input type="file" name="img_c1" accept="image/*" class="admin-file-input" onchange="previewImg(this, 'preview_c1')">
+                                <span>Cambiar Medio</span>
+                                <input type="file" name="img_c1" accept="image/*,video/mp4,video/webm" class="admin-file-input" onchange="previewMedia(this, 'preview_c1', 'pos_c1_img_pos')">
                             </div>
                         </div>
                     </div>
@@ -669,14 +812,22 @@ function e($str) {
                     </div>
                 </div>
 
+                <!-- Clase 2 -->
                 <div class="class-card">
                     <div class="class-img">
-                        <div class="admin-img-container">
-                            <img src="<?php echo getAdminImgUrl('clase-hatha.jpg'); ?>" id="preview_c2" alt="Hatha Yoga">
+                        <div class="admin-img-container" style="position: relative; height: 100%;">
+                            <?php if (($texts['c2_type'] ?? 'image') === 'video' && !empty($texts['c2_video_file'])): ?>
+                                <video id="preview_c2" src="<?php echo getAdminImgUrl($texts['c2_video_file']); ?>" autoplay loop muted playsinline class="drag-media" draggable="false" data-pos-input="pos_c2_img_pos"></video>
+                            <?php else: ?>
+                                <img id="preview_c2" src="<?php echo getAdminImgUrl('clase-hatha.jpg'); ?>" alt="Hatha Yoga" class="drag-media" draggable="false" data-pos-input="pos_c2_img_pos" style="object-position: 50% <?php echo e($texts['c2_img_pos'] ?? '50'); ?>%;">
+                            <?php endif; ?>
+                            <input type="hidden" id="pos_c2_img_pos" name="texts[c2_img_pos]" value="<?php echo e($texts['c2_img_pos'] ?? '50'); ?>">
+                            <div class="drag-tooltip" id="tooltip_c2">↕ <?php echo e($texts['c2_img_pos'] ?? '50'); ?>%</div>
+                            <div class="drag-hint">↕ Arrastrar para ajustar</div>
                             <div class="admin-img-overlay">
                                 <i class="fa-solid fa-camera"></i>
-                                <span>Cambiar Imagen</span>
-                                <input type="file" name="img_c2" accept="image/*" class="admin-file-input" onchange="previewImg(this, 'preview_c2')">
+                                <span>Cambiar Medio</span>
+                                <input type="file" name="img_c2" accept="image/*,video/mp4,video/webm" class="admin-file-input" onchange="previewMedia(this, 'preview_c2', 'pos_c2_img_pos')">
                             </div>
                         </div>
                     </div>
@@ -690,14 +841,22 @@ function e($str) {
                     </div>
                 </div>
 
+                <!-- Clase 3 -->
                 <div class="class-card">
                     <div class="class-img">
-                        <div class="admin-img-container">
-                            <img src="<?php echo getAdminImgUrl('clase-meditacion.jpg'); ?>" id="preview_c3" alt="Pranayama & Meditación">
+                        <div class="admin-img-container" style="position: relative; height: 100%;">
+                            <?php if (($texts['c3_type'] ?? 'image') === 'video' && !empty($texts['c3_video_file'])): ?>
+                                <video id="preview_c3" src="<?php echo getAdminImgUrl($texts['c3_video_file']); ?>" autoplay loop muted playsinline class="drag-media" draggable="false" data-pos-input="pos_c3_img_pos"></video>
+                            <?php else: ?>
+                                <img id="preview_c3" src="<?php echo getAdminImgUrl('clase-meditacion.jpg'); ?>" alt="Pranayama & Meditación" class="drag-media" draggable="false" data-pos-input="pos_c3_img_pos" style="object-position: 50% <?php echo e($texts['c3_img_pos'] ?? '50'); ?>%;">
+                            <?php endif; ?>
+                            <input type="hidden" id="pos_c3_img_pos" name="texts[c3_img_pos]" value="<?php echo e($texts['c3_img_pos'] ?? '50'); ?>">
+                            <div class="drag-tooltip" id="tooltip_c3">↕ <?php echo e($texts['c3_img_pos'] ?? '50'); ?>%</div>
+                            <div class="drag-hint">↕ Arrastrar para ajustar</div>
                             <div class="admin-img-overlay">
                                 <i class="fa-solid fa-camera"></i>
-                                <span>Cambiar Imagen</span>
-                                <input type="file" name="img_c3" accept="image/*" class="admin-file-input" onchange="previewImg(this, 'preview_c3')">
+                                <span>Cambiar Medio</span>
+                                <input type="file" name="img_c3" accept="image/*,video/mp4,video/webm" class="admin-file-input" onchange="previewMedia(this, 'preview_c3', 'pos_c3_img_pos')">
                             </div>
                         </div>
                     </div>
@@ -835,19 +994,139 @@ function e($str) {
     <!-- JavaScript -->
     <script src="../assets/js/main.js"></script>
     <script>
-        // Vista previa de imagen seleccionada antes de enviar
+        // ===== PREVIEW DE IMAGEN / VIDEO =====
         function previewImg(input, targetId) {
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const img = document.getElementById(targetId);
-                    if (img) {
-                        img.src = e.target.result;
-                    }
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
+            if (!input.files || !input.files[0]) return;
+            const file = input.files[0];
+            const isVideo = file.type.startsWith('video/');
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                let el = document.getElementById(targetId);
+                if (!el) return;
+                if (isVideo && el.tagName === 'IMG') {
+                    const video = document.createElement('video');
+                    video.id = targetId; video.autoplay = true; video.loop = true;
+                    video.muted = true; video.setAttribute('playsinline', '');
+                    video.className = el.className;
+                    video.dataset.posInput = el.dataset.posInput || '';
+                    video.draggable = false;
+                    video.style.cssText = 'width:100%;height:100%;object-fit:cover;cursor:ns-resize;user-select:none;';
+                    el.parentNode.replaceChild(video, el);
+                    el = video;
+                    initDragMedia(el);
+                } else if (!isVideo && el.tagName === 'VIDEO') {
+                    const img = document.createElement('img');
+                    img.id = targetId; img.alt = '';
+                    img.className = el.className;
+                    img.dataset.posInput = el.dataset.posInput || '';
+                    img.draggable = false;
+                    img.style.cssText = 'width:100%;height:100%;object-fit:cover;cursor:ns-resize;user-select:none;';
+                    el.parentNode.replaceChild(img, el);
+                    el = img;
+                    initDragMedia(el);
+                }
+                el.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
         }
+
+        function previewMedia(input, targetId, posInputId) {
+            previewImg(input, targetId);
+        }
+
+        // ===== ARRASTRE VERTICAL PARA AJUSTAR POSICIÓN =====
+        function initDragMedia(el) {
+            if (!el || el._dragInit) return;
+            el._dragInit = true;
+
+            const posInputId = el.dataset.posInput;
+            // El tooltip es el hermano .drag-tooltip dentro del mismo container
+            const container = el.closest('.admin-img-container');
+            const tooltip = container ? container.querySelector('.drag-tooltip') : null;
+
+            let startY = 0;
+            let startPos = 0;
+            let dragging = false;
+            let tooltipTimer = null;
+
+            function getPos() {
+                const input = posInputId ? document.getElementById(posInputId) : null;
+                return input ? parseInt(input.value, 10) : 50;
+            }
+
+            function setPos(val) {
+                val = Math.max(-200, Math.min(300, Math.round(val)));
+                el.style.objectPosition = '50% ' + val + '%';
+                const input = posInputId ? document.getElementById(posInputId) : null;
+                if (input) input.value = val;
+                if (tooltip) {
+                    tooltip.textContent = '\u2195 ' + val + '%';
+                    tooltip.classList.add('visible');
+                    clearTimeout(tooltipTimer);
+                    tooltipTimer = setTimeout(() => tooltip.classList.remove('visible'), 1200);
+                }
+            }
+
+            el.addEventListener('mousedown', function(e) {
+                // Solo click izquierdo, no en el overlay de cambio de archivo
+                if (e.button !== 0) return;
+                e.preventDefault();
+                dragging = true;
+                startY = e.clientY;
+                startPos = getPos();
+                el.classList.add('dragging');
+                if (tooltip) tooltip.classList.add('visible');
+            });
+
+            el.addEventListener('dragstart', function(e) {
+                e.preventDefault();
+            });
+
+            document.addEventListener('mousemove', function(e) {
+                if (!dragging) return;
+                // Mover hacia arriba = reducir %, mover hacia abajo = aumentar %
+                const deltaY = e.clientY - startY;
+                const containerH = el.offsetHeight || 200;
+                const deltaPct = (deltaY / containerH) * 100;
+                setPos(startPos + deltaPct);
+            });
+
+            document.addEventListener('mouseup', function() {
+                if (!dragging) return;
+                dragging = false;
+                el.classList.remove('dragging');
+                setTimeout(() => { if (tooltip) tooltip.classList.remove('visible'); }, 1200);
+            });
+
+            // Soporte táctil
+            el.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                startY = e.touches[0].clientY;
+                startPos = getPos();
+                dragging = true;
+                el.classList.add('dragging');
+            }, { passive: false });
+
+            el.addEventListener('touchmove', function(e) {
+                if (!dragging) return;
+                e.preventDefault();
+                const deltaY = e.touches[0].clientY - startY;
+                const containerH = el.offsetHeight || 200;
+                const deltaPct = (deltaY / containerH) * 100;
+                setPos(startPos + deltaPct);
+            }, { passive: false });
+
+            el.addEventListener('touchend', function() {
+                dragging = false;
+                el.classList.remove('dragging');
+                setTimeout(() => { if (tooltip) tooltip.classList.remove('visible'); }, 1200);
+            });
+        }
+
+        // Inicializar todos los drag-media al cargar
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.drag-media').forEach(initDragMedia);
+        });
     </script>
 </body>
 
