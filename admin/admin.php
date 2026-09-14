@@ -619,16 +619,16 @@ function e($str) {
             </div>
             <div class="admin-bar-actions">
                 <a href="admin.php" class="btn-admin-view" style="font-weight: bold; border-bottom: 2px solid var(--admin-accent); padding-bottom: 4px;">
-                    <i class="fa-solid fa-file-pen"></i> Contenido Web
+                    Contenido Web
                 </a>
                 <a href="products.php" class="btn-admin-view">
-                    <i class="fa-solid fa-boxes-stacked"></i> Catálogo de Productos
+                    Catálogo de Productos
                 </a>
                 <a href="users.php" class="btn-admin-view">
-                    <i class="fa-solid fa-users"></i> Usuarios
+                    Usuarios
                 </a>
                 <a href="../index.php" target="_blank" class="btn-admin-view">
-                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver Sitio
+                    Ver Sitio
                 </a>
                 <button type="submit" class="btn-admin-save">
                     <i class="fa-solid fa-floppy-disk"></i> Guardar Cambios

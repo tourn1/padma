@@ -47,6 +47,15 @@ $errorMessages = [];
 $action = $_GET['action'] ?? 'list';
 $editId = $_GET['id'] ?? '';
 
+// Calcular el próximo número de orden disponible
+$maxOrden = 0;
+foreach ($products as $p) {
+    if (isset($p['orden']) && (int)$p['orden'] > $maxOrden) {
+        $maxOrden = (int)$p['orden'];
+    }
+}
+$nextOrden = $maxOrden + 1;
+
 // Obtener producto a editar si aplica
 $editProduct = null;
 if ($action === 'edit' && !empty($editId)) {
@@ -578,16 +587,16 @@ function e($str) {
         </div>
         <div class="admin-bar-actions">
             <a href="admin.php" class="btn-admin-view">
-                <i class="fa-solid fa-file-pen"></i> Contenido Web
+                Contenido Web
             </a>
             <a href="products.php" class="btn-admin-view" style="font-weight: bold; border-bottom: 2px solid var(--admin-accent); padding-bottom: 4px;">
-                <i class="fa-solid fa-boxes-stacked"></i> Catálogo de Productos
+                Catálogo de Productos
             </a>
             <a href="users.php" class="btn-admin-view">
-                <i class="fa-solid fa-users"></i> Usuarios
+                Usuarios
             </a>
             <a href="../index.php" target="_blank" class="btn-admin-view">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver Sitio
+                Ver Sitio
             </a>
             <a href="products.php?action=logout" class="btn-admin-logout" title="Cerrar Sesión">
                 <i class="fa-solid fa-right-from-bracket"></i> Salir
@@ -641,7 +650,7 @@ function e($str) {
 
                     <div class="form-group">
                         <label class="form-label" for="orden">Orden (menor número aparece primero)</label>
-                        <input type="number" id="orden" name="orden" class="form-input" value="<?php echo e($editProduct['orden'] ?? 0); ?>" required style="max-width: 150px;">
+                        <input type="number" id="orden" name="orden" class="form-input" value="<?php echo e($editProduct['orden'] ?? $nextOrden); ?>" required style="max-width: 150px;">
                     </div>
 
                     <div class="form-group">

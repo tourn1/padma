@@ -1,24 +1,5 @@
 [
     {
-        "id": "prod_6a918a87a946c3.67607148",
-        "nombre": "Roll on Concentrado Natural — Insomnio (Vata)",
-        "descripcion": "Reduce la ansiedad, el nerviosismo y el insomnio.\r\nCalmante, reduce la culpa, libera las emociones, aquieta la mente.",
-        "imagen": "roll_on_concentrado_natural_____insomnio__vata__1787923079.jpg",
-        "activo": true,
-        "destacado": true,
-        "orden": 0,
-        "imagenes": [
-            {
-                "archivo": "roll_on_concentrado_natural_____insomnio__vata__1787923079.jpg",
-                "nombre": "imagen 1"
-            },
-            {
-                "archivo": "roll_on_concentrado_natural_____insomnio__vata__1789010514_0.jpeg",
-                "nombre": "imagen 2"
-            }
-        ]
-    },
-    {
         "id": "prod_6a918ab6b2a284.17229113",
         "nombre": "Roll on Concentrado Natural — Energía (Kapha)",
         "descripcion": "Reduce la depresión, fatiga y cansancio.\r\nReduce la ansiedad y al mismo tiempo energiza.\r\nRegula los humores y aumenta la autoconfianza.",
@@ -31,7 +12,7 @@
             }
         ],
         "destacado": true,
-        "orden": 0
+        "orden": 8
     },
     {
         "id": "prod_6a918add92acb5.49600743",
@@ -105,5 +86,24 @@
         "imagen": "roll_on_concentrado_natural_____anti-estr__s__pitta__1787923036.jpg",
         "activo": true,
         "orden": 0
+    },
+    {
+        "id": "prod_6a918a87a946c3.67607148",
+        "nombre": "Roll on Concentrado Natural — Insomnio (Vata)",
+        "descripcion": "Reduce la ansiedad, el nerviosismo y el insomnio.\r\nCalmante, reduce la culpa, libera las emociones, aquieta la mente.",
+        "imagen": "roll_on_concentrado_natural_____insomnio__vata__1787923079.jpg",
+        "activo": true,
+        "destacado": true,
+        "orden": 1,
+        "imagenes": [
+            {
+                "archivo": "roll_on_concentrado_natural_____insomnio__vata__1787923079.jpg",
+                "nombre": "imagen 1"
+            },
+            {
+                "archivo": "roll_on_concentrado_natural_____insomnio__vata__1789010514_0.jpeg",
+                "nombre": "imagen 2"
+            }
+        ]
     }
 ]
