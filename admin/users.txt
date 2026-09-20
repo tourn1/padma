@@ -1,0 +1,20 @@
+[
+    {
+        "id": "usr_6aa5657a1ff0e7.39704055",
+        "usuario": "admin",
+        "clave": "admin",
+        "activo": false
+    },
+    {
+        "id": "usr_6aa56591039a28.77673813",
+        "usuario": "tourn1",
+        "clave": "airesS2011",
+        "activo": true
+    },
+    {
+        "id": "usr_6aa565eb8a5d77.44543854",
+        "usuario": "vane",
+        "clave": "vane2026$",
+        "activo": true
+    }
+]

@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($captcha)) {
         $error = 'Por favor, confirma que no eres un robot.';
     } else {
-        $usersFile = dirname(__FILE__) . '/upload/users.txt';
+        $usersFile = dirname(__FILE__) . '/users.txt';
         $validUser = false;
         
         if (file_exists($usersFile)) {

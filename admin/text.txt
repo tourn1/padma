@@ -46,7 +46,7 @@
     "c1_img_pos": "61",
     "c1_video_file": "clase-vinyasa.mp4",
     "c2_type": "image",
-    "c2_img_pos": "65",
+    "c2_img_pos": "58",
     "c2_video_file": "",
     "c3_type": "image",
     "c3_img_pos": "46",

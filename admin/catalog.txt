@@ -1,0 +1,536 @@
+[
+    {
+        "id": "prod_6a91880534fe31.81267945",
+        "nombre": "Roll on Concentrado Natural — Anti-estrés (Pitta)",
+        "descripcion": "Reduce el estrés, el embotamiento y cansancio mental.\r\nLibera las tensiones mentales y abre las vías respiratorias.",
+        "imagen": "roll_on_concentrado_natural_____anti-estr__s__pitta__1787923036.jpg",
+        "activo": true,
+        "orden": 1,
+        "imagenes": [
+            {
+                "archivo": "roll_on_concentrado_natural_____anti-estr__s__pitta__1787923036.jpg",
+                "nombre": "Principal"
+            }
+        ],
+        "destacado": true
+    },
+    {
+        "id": "prod_6a918a87a946c3.67607148",
+        "nombre": "Roll on Concentrado Natural — Insomnio (Vata)",
+        "descripcion": "Reduce la ansiedad, el nerviosismo y el insomnio.\r\nCalmante, reduce la culpa, libera las emociones, aquieta la mente.",
+        "imagen": "roll_on_concentrado_natural_____insomnio__vata__1787923079.jpg",
+        "activo": true,
+        "orden": 2,
+        "imagenes": [
+            {
+                "archivo": "roll_on_concentrado_natural_____insomnio__vata__1787923079.jpg",
+                "nombre": "Principal"
+            }
+        ],
+        "destacado": true
+    },
+    {
+        "id": "prod_6a918ab6b2a284.17229113",
+        "nombre": "Roll on Concentrado Natural — Energía (Kapha)",
+        "descripcion": "Reduce la depresión, fatiga y cansancio.\r\nReduce la ansiedad y al mismo tiempo energiza.\r\nRegula los humores y aumenta la autoconfianza.",
+        "imagen": "roll_on_concentrado_natural_____energ__a__kapha__1787923126.jpg",
+        "activo": true,
+        "orden": 3
+    },
+    {
+        "id": "prod_6a918add92acb5.49600743",
+        "nombre": "Set de Roll on Concentrado Natural (Energía - Stress - Insomnio)",
+        "descripcion": "• Energía (Kapha): Reduce la depresión, fatiga y cansancio. Reduce la ansiedad y al mismo tiempo energiza. Regula los humores y aumenta la autoconfianza.\r\n• Stress (Pitta): Reduce el estrés, el embotamiento y cansancio mental. Libera las tensiones mentales y abre las vías respiratorias.\r\n• Insomnio (Vata): Reduce la ansiedad, el nerviosismo y el insomnio. Calmante, reduce la culpa, libera las emociones, aquieta la mente.",
+        "imagen": "set_de_roll_on_concentrado_natural__energ__a_-_stress_-_insomnio__1787923165.jpg",
+        "activo": true,
+        "orden": 4
+    },
+    {
+        "id": "prod_6a918b225dd042.92697100",
+        "nombre": "Aceites esenciales: Naranja, Eucalipto y Neroli",
+        "descripcion": "Junto al hornillo difusor de cerámica.\r\nNaranja:\r\nAyuda a aplacar los enojos e irritaciones, es antidepresivo, lo llaman anti conflicto. Se puede utilizar en difusores, hornillo a vela o eléctrico, inhalaciones, o diluido en aceite vehicular o crema sobre la piel.\r\nEucalipto:\r\nAdemás de su fresco aroma, tiene importantes propiedades anti bacterianas para el dolor e inflamación de las membranas de las mucosas del tracto respiratorio, tos, asma, bronquitis, dolor sinusal, e infecciones respiratorias. Ayuda a prepararse para los cambios bruscos de estación. Se puede utilizar en difusores, hornillo a vela o eléctrico, inhalaciones, o diluido en aceite vehicular o crema sobre la piel.\r\nNeroli:\r\nEstimula los afectos y renueva la seguridad en uno mismo. Estimula la renovación celular, nutre, hidrata, y tonifica la piel. Se puede utilizar en difusores, hornillo a vela o eléctrico, inhalaciones, o diluido en aceite vehicular o crema sobre la piel.",
+        "imagen": "aceites_esenciales__naranja__eucalipto_y_neroli_1787923234.jpg",
+        "activo": true,
+        "orden": 5,
+        "imagenes": [
+            {
+                "archivo": "aceites_esenciales__naranja__eucalipto_y_neroli_1787923234.jpg",
+                "nombre": "Principal"
+            }
+        ],
+        "destacado": true
+    },
+    {
+        "id": "prod_6a918b905f7ba7.12744672",
+        "nombre": "Aceites esenciales: Bergamota, Menta y Geranio",
+        "descripcion": "Junto al hornillo difusor de cerámica.\r\nBergamota:\r\nEl aceite esencial de Bergamota reduce la ansiedad, alivia la depresión, mejora el humor, la aplicación del aceite diluido sobre la piel es capaz de reducir la presión arterial, tanto el alta como la baja. Se puede utilizar en difusores, hornillo a vela o eléctrico, inhalaciones, o diluido en aceite vehicular o crema sobre la piel.\r\nMenta:\r\nTiene efectos estimulantes y es usado para reducir el estrés y aliviar las tensiones y los nervios, así como para mejorar la memoria y la concentración. Por ello es muy común usarlo para el dolor de cabeza y las migrañas. Se puede utilizar en difusores, hornillo a vela o eléctrico, inhalaciones, o diluido en aceite vehicular o crema sobre la piel.\r\nGeranio:\r\nEs armonizante, ayuda a transitar los ciclos de la mujer. También es astringente, estimulante circulatorio ayuda a mejorar la retención de líquidos, apto para pieles grasas. Se puede utilizar en difusores, hornillo a vela o eléctrico, inhalaciones, o diluido en aceite vehicular o crema sobre la piel.",
+        "imagen": "aceites_esenciales__bergamota__menta_y_geranio_1787923344.jpg",
+        "activo": true,
+        "orden": 6
+    },
+    {
+        "id": "prod_6a918bddc3d185.19230479",
+        "nombre": "Línea completa de Aceites esenciales",
+        "descripcion": "En la foto se distinguen, de izquierda a derecha: Tea Tree, Lavanda, Eucalipto, Naranja, Menta, y otros tres frascos de la misma línea (etiqueta no legible con claridad en la imagen).\r\nTea Tree:\r\nDestaca por sus propiedades antisépticas, anti fúngicas y antibióticas. Es también cicatrizante y tiene propiedades calmantes y purificantes. Se puede utilizar en difusores, hornillo a vela o eléctrico, inhalaciones, o directamente sobre la piel.\r\nLavanda:\r\nSu aroma calma y aquieta los nervios, la ansiedad y el estrés ayudando a conciliar el sueño. Es el aceite ideal para tener en el botiquín de primeros auxilios en el caso de quemaduras, eczemas y alergias. Se puede utilizar en difusores, hornillo a vela o eléctrico, inhalaciones, o diluido en aceite vehicular o crema sobre la piel.\r\nEucalipto:\r\nAdemás de su fresco aroma, tiene importantes propiedades anti bacterianas para el dolor e inflamación de las membranas de las mucosas del tracto respiratorio, tos, asma, bronquitis, dolor sinusal, e infecciones respiratorias. Ayuda a prepararse para los cambios bruscos de estación.\r\nNaranja:\r\nAyuda a aplacar los enojos e irritaciones, es antidepresivo, lo llaman anti conflicto.\r\nMenta:\r\nTiene efectos estimulantes y es usado para reducir el estrés y aliviar las tensiones y los nervios, así como para mejorar la memoria y la concentración.\r\nNota: el Word incluye además Romero, Manzanilla, Tea Tree (repetido), Geranio, Jazmín, Neroli y Limón como parte de la línea de aceites esenciales; si podés confirmar cuáles son los 3 frascos restantes de la foto, agrego su descripción exacta.",
+        "imagen": "l__nea_completa_de_aceites_esenciales_1787923421.jpg",
+        "activo": true,
+        "orden": 7
+    },
+    {
+        "id": "prod_6a918c35567f51.60338484",
+        "nombre": "Body Splash: Mango y Maracuyá \/ Uva \/ Vainilla y Benjui",
+        "descripcion": "Mango-Maracuyá:\r\nContiene esencia de mango-maracuyá. Reduce el cansancio mental, libera tensiones.\r\nUva:\r\nContiene esencia de uva. Activa el sistema nervioso reduciendo el cansancio, la fatiga y el agotamiento. Suministra energía y vitalidad. Alivia los estados de bloqueos psico-emocionales.\r\nVainilla y Benjui:\r\nContiene esencia de benjui y vainilla. Reduce la ansiedad, dando calma, paz, prosperidad.",
+        "imagen": "body_splash__mango_y_maracuy_____uva___vainilla_y_benjui_1787923509.jpg",
+        "activo": true,
+        "orden": 8
+    },
+    {
+        "id": "prod_6a918c695cd795.67321831",
+        "nombre": "Splash Meditación",
+        "descripcion": "Contiene esencias puras de lavanda y sándalo.\r\nLa lavanda calma la energía del espacio y el individuo, el sándalo proyecta un lugar de tranquilidad, ayudando a mantenerse despierto. Ideal para la meditación.",
+        "imagen": "splash_meditaci__n_1787923561.jpg",
+        "activo": true,
+        "orden": 9
+    },
+    {
+        "id": "prod_6a918ca0c5a792.66925580",
+        "nombre": "Splash Sueña",
+        "descripcion": "Contiene esencias de lavanda, melisa y manzanilla.\r\nInduce al descanso relajando, sacando tensión nerviosa, sedante natural, ayuda al buen dormir. Ideal para niños a partir de los 3 meses. Se utiliza rociando la almohada antes de dormir.",
+        "imagen": "splash_sue__a_1787923616.jpg",
+        "activo": true,
+        "orden": 10
+    },
+    {
+        "id": "prod_6aa1f613aaced4.72555290",
+        "nombre": "Nardo y Mirra",
+        "descripcion": "Para utilizar como protector del espacio o sobre el cuerpo como body splash. Para la meditación, ayuda a conectarse con uno mismo.",
+        "imagen": "nardo_y_mirra_1788999187.jpeg",
+        "activo": true,
+        "orden": 11
+    },
+    {
+        "id": "prod_6aa20ea7bdf118.02168874",
+        "nombre": "Gel anti acne",
+        "descripcion": "Ayuda a remover acné, puntos negros y reduce las cicatrices.\r\nLavarse la cara y aplicar directamente sobre el área afectada. Usar diariamente.",
+        "imagen": "gel_anti_acne_1789005479.JPG",
+        "activo": true,
+        "orden": 12
+    },
+    {
+        "id": "prod_6aa2113a173193.65865929",
+        "nombre": "Desodorante Natural",
+        "descripcion": "Formula artesanal creada para acompañar tu piel de manera suave y natural. Con aceite de coco, manteca de karite, aceite esencial de Lavanda y Geranio.",
+        "imagen": "desodorante_natural_1789006138.jpeg",
+        "activo": true,
+        "orden": 13
+    },
+    {
+        "id": "prod_6aa30897d6d181.23148975",
+        "nombre": "Hornillo a vela",
+        "descripcion": "Para aromaterapia, se utiliza en cualquier ambiente donde no haya correntada de aire, el agua que se coloca en el cuenco antes del aceite debe estar templada. Recomendamos utilizar Aceites Esenciales que actúan con el objetivo de mejorar el bienestar psicológico o físico que esté necesitando. Los aceites aromáticos, sólo aromatizan sin dar ningún efecto sobre la salud.",
+        "imagen": "hornillo_a_vela_1789069463_0.jpg",
+        "imagenes": [
+            {
+                "archivo": "hornillo_a_vela_1789069463_0.jpg",
+                "nombre": "Caminante"
+            }
+        ],
+        "activo": true,
+        "destacado": false,
+        "orden": 14
+    },
+    {
+        "id": "prod_6aa30913090969.18823019",
+        "nombre": "Hornillo a vela",
+        "descripcion": "Para aromaterapia, se utiliza en cualquier ambiente donde no haya correntada de aire, el agua que se coloca en el cuenco antes del aceite debe estar templada. Recomendamos utilizar Aceites Esenciales que actúan con el objetivo de mejorar el bienestar psicológico o físico que esté necesitando. Los aceites aromáticos, sólo aromatizan sin dar ningún efecto sobre la salud.",
+        "imagen": "hornillo_a_vela_1789069587_0.jpg",
+        "imagenes": [
+            {
+                "archivo": "hornillo_a_vela_1789069587_0.jpg",
+                "nombre": "Egipcio"
+            }
+        ],
+        "activo": true,
+        "destacado": false,
+        "orden": 15
+    },
+    {
+        "id": "prod_6aa3094b30a488.29638957",
+        "nombre": "Hornillo a vela",
+        "descripcion": "Para aromaterapia, se utiliza en cualquier ambiente donde no haya correntada de aire, el agua que se coloca en el cuenco antes del aceite debe estar templada. Recomendamos utilizar Aceites Esenciales que actúan con el objetivo de mejorar el bienestar psicológico o físico que esté necesitando. Los aceites aromáticos, sólo aromatizan sin dar ningún efecto sobre la salud.",
+        "imagen": "hornillo_a_vela_1789069643_0.jpg",
+        "imagenes": [
+            {
+                "archivo": "hornillo_a_vela_1789069643_0.jpg",
+                "nombre": "A la Luz"
+            }
+        ],
+        "activo": true,
+        "destacado": false,
+        "orden": 16
+    },
+    {
+        "id": "prod_6aa30a6fba31e6.88618188",
+        "nombre": "Lampara de Sal",
+        "descripcion": "El principal beneficio de las lámparas de sal es su capacidad de ionizar el aire. Estas piedras emiten iones negativos que aportan equilibrio al pegarse a los positivos que emiten los dispositivos electrónicos, es decir, son capaces de absorber el exceso de ondas electromagnéticas. Mejoran la calidad del sueño, también pueden ser beneficiosas para el organismo a nivel circulatorio, respiratorio o nervioso. Reducen la estática del aire.",
+        "imagen": "lampara_de_sal_1789069935_0.jpg",
+        "imagenes": [
+            {
+                "archivo": "lampara_de_sal_1789069935_0.jpg",
+                "nombre": "Imagen 1"
+            }
+        ],
+        "activo": true,
+        "destacado": false,
+        "orden": 17
+    },
+    {
+        "id": "prod_6aa30c7a595d62.64765631",
+        "nombre": "Crema Hidratante",
+        "descripcion": "Crema hidratante para piel normal a seca, devuelve la humedad natural de la piel, reduce las arañitas, estrías y arrugas.\r\nSe recomienda su uso diario en todo el cuerpo.\r\nEste producto no está formulado para niños.",
+        "imagen": "crema_hidratante_1789070458_0.jpg",
+        "imagenes": [
+            {
+                "archivo": "crema_hidratante_1789070458_0.jpg",
+                "nombre": "Imagen 1"
+            }
+        ],
+        "activo": true,
+        "destacado": false,
+        "orden": 18
+    },
+    {
+        "id": "prod_6aa30d7bf06804.78941298",
+        "nombre": "Crema de Lavanda",
+        "descripcion": "Promueve la cura de quemaduras sin dejar marcas ni cicatrices, calma irritaciones, refresca y restaura. Combate infecciones, favorece el buen dormir, relaja. Además equilibra los sentidos y las emociones y contribuye a mejorar el estado del ánimo.",
+        "imagen": "crema_de_lavanda_1789070715_0.PNG",
+        "imagenes": [
+            {
+                "archivo": "crema_de_lavanda_1789070715_0.PNG",
+                "nombre": "Imagen 1"
+            }
+        ],
+        "activo": true,
+        "destacado": false,
+        "orden": 19
+    },
+    {
+        "id": "prod_6aa31029e019b1.01661951",
+        "nombre": "Bálsamo Corporal",
+        "descripcion": "Bálsamo desinflamatorio, ideal para golpes, picaduras, dermatitis, hipo alergénico. Puede usarse en niños mayores de 2 meses.\r\nPara tratamiento de dermatitis por pañal o transpiración. Alergias cutáneas.",
+        "imagen": "b__lsamo_corporal_1789071401_0.jpg",
+        "imagenes": [
+            {
+                "archivo": "b__lsamo_corporal_1789071401_0.jpg",
+                "nombre": "Imagen 1"
+            }
+        ],
+        "activo": true,
+        "destacado": false,
+        "orden": 20
+    },
+    {
+        "id": "prod_6aa3114d3e2054.74263941",
+        "nombre": "Gel post solar\/depilatorio",
+        "descripcion": "Gel refrescante e hidratante. Devuelve la humedad a la piel que ha sufrido exposición solar y depilación. Evitar la exposición solar directa sobre la piel hasta 4hs después de aplicado el producto.",
+        "imagen": "gel_post_solar_depilatorio_1789071693_0.jpg",
+        "imagenes": [
+            {
+                "archivo": "gel_post_solar_depilatorio_1789071693_0.jpg",
+                "nombre": "Imagen 1"
+            }
+        ],
+        "activo": true,
+        "destacado": false,
+        "orden": 21
+    },
+    {
+        "id": "prod_6aa3138c98f280.09090865",
+        "nombre": "Crema Herbal para pies",
+        "descripcion": "Crema refrescante, desinflamatoria, relaja el cansancio de estar tanto tiempo parado o por presión del calzado. Masajear los pies suavemente, se recomienda su uso durante la noche para descansar relajado.",
+        "imagen": "crema_herbal_para_pies_1789072268_0.jpg",
+        "imagenes": [
+            {
+                "archivo": "crema_herbal_para_pies_1789072268_0.jpg",
+                "nombre": "Imagen 1"
+            }
+        ],
+        "activo": true,
+        "destacado": false,
+        "orden": 22
+    },
+    {
+        "id": "prod_6aa3149311a6e6.25520470",
+        "nombre": "Crema Descontracturante",
+        "descripcion": "Crema para masajes descontracturante. Sus componentes ayudan a liberar\r\nel ácido láctico retenido en los músculos.\r\nSe recomienda su uso directo sobre el área en tensión, dar un suave masaje y dejar actuar.",
+        "imagen": "crema_descontracturante_1789072531_0.jpg",
+        "imagenes": [
+            {
+                "archivo": "crema_descontracturante_1789072531_0.jpg",
+                "nombre": "Imagen 1"
+            }
+        ],
+        "activo": true,
+        "destacado": false,
+        "orden": 23
+    },
+    {
+        "id": "prod_6aa31582a339f9.25083651",
+        "nombre": "Gel Desinflamatorio",
+        "descripcion": "Gel refrescante y desinflamatorio. Alivia el dolor articular y los trastornos circulatorios. Se recomienda su uso nocturno en zonas afectadas. Ideal para piernas cansadas.",
+        "imagen": "gel_desinflamatorio_1789072770_0.JPG",
+        "imagenes": [
+            {
+                "archivo": "gel_desinflamatorio_1789072770_0.JPG",
+                "nombre": "Imagen 1"
+            }
+        ],
+        "activo": true,
+        "destacado": false,
+        "orden": 24
+    },
+    {
+        "id": "prod_6aa3181cac2745.92494698",
+        "nombre": "Respira",
+        "descripcion": "Contiene esencias puras de eucalipto y pino.\r\nEl eucalipto y el pino descongestionan la mente y el sistema respiratorio ayudando a inhalar libremente. Ideal para alergias, asma, resfríos",
+        "imagen": "respira_1789073436_0.jpg",
+        "imagenes": [
+            {
+                "archivo": "respira_1789073436_0.jpg",
+                "nombre": "Imagen 1"
+            }
+        ],
+        "activo": true,
+        "destacado": false,
+        "orden": 25
+    },
+    {
+        "id": "prod_6aa3187f2bff27.04020315",
+        "nombre": "Crema de tomillo y eucalipto",
+        "descripcion": "Crema descongestiva de tratamiento para problemas respiratorios, gripe, asma, alergia etc. Se recomienda su uso nocturno sobre las áreas del pecho, espalda alta, planta de los pies.",
+        "imagen": "crema_de_tomillo_y_eucalipto_1789073535_0.JPG",
+        "imagenes": [
+            {
+                "archivo": "crema_de_tomillo_y_eucalipto_1789073535_0.JPG",
+                "nombre": "Imagen 1"
+            }
+        ],
+        "activo": true,
+        "destacado": false,
+        "orden": 26
+    },
+    {
+        "id": "prod_6aa31b02596b34.29008106",
+        "nombre": "Crema de limpieza para piel normal o grasa.",
+        "descripcion": "Crema purificadora de limpieza facial para pieles normales o grasas. \r\nReguladora del ph de la piel.\r\nDesmaquilladora.",
+        "imagen": "crema_de_limpieza_para_piel_normal_o_grasa__1789074178_0.jpg",
+        "imagenes": [
+            {
+                "archivo": "crema_de_limpieza_para_piel_normal_o_grasa__1789074178_0.jpg",
+                "nombre": "Imagen 1"
+            }
+        ],
+        "activo": true,
+        "destacado": false,
+        "orden": 27
+    },
+    {
+        "id": "prod_6aa31bc7507cb0.41976592",
+        "nombre": "Crema para piel sensible o rosácea",
+        "descripcion": "Crema nutritiva. Puede usarse como crema de limpieza. Especial para pieles sensible o rosácea.\r\nCombine este producto con un protector solar durante el día.",
+        "imagen": "crema_para_piel_sensible_o_ros__cea_1789074375_0.jpg",
+        "imagenes": [
+            {
+                "archivo": "crema_para_piel_sensible_o_ros__cea_1789074375_0.jpg",
+                "nombre": "Imagen 1"
+            }
+        ],
+        "activo": true,
+        "destacado": false,
+        "orden": 28
+    },
+    {
+        "id": "prod_6aa31c45198de5.20494588",
+        "nombre": "Crema Humectante",
+        "descripcion": "Crema humectante hipo alergénica. Suaviza e hidrata rápidamente el rostro, para pieles normales a grasas.",
+        "imagen": "crema_humectante_1789074574_0.JPG",
+        "imagenes": [
+            {
+                "archivo": "crema_humectante_1789074574_0.JPG",
+                "nombre": "Imagen 1"
+            },
+            {
+                "archivo": "crema_humectante_1789074587_0.JPG",
+                "nombre": "Imagen 2"
+            }
+        ],
+        "activo": true,
+        "destacado": false,
+        "orden": 29
+    },
+    {
+        "id": "prod_6aa31df0a534d3.78218902",
+        "nombre": "Crema Anti-age",
+        "descripcion": "Crema hidratante y nutritiva para piel madura y\/o sensible con tendencia a seca.\r\nPuede aplicarse en todo el rostro. Reduce arrugas, bolsas y líneas de expresión.",
+        "imagen": "crema_anti-age_1789074928_0.jpg",
+        "imagenes": [
+            {
+                "archivo": "crema_anti-age_1789074928_0.jpg",
+                "nombre": "Imagen 1"
+            }
+        ],
+        "activo": true,
+        "destacado": false,
+        "orden": 30
+    },
+    {
+        "id": "prod_6aa31e6bc2d692.75010672",
+        "nombre": "Tónico facial Agua de Rosas",
+        "descripcion": "Desinflamatorio e hidratante.\r\nUtilizar después de la limpieza facial para cerrar poros e hidratar la piel.",
+        "imagen": "t__nico_facial_agua_de_rosas_1789075051_0.JPG",
+        "imagenes": [
+            {
+                "archivo": "t__nico_facial_agua_de_rosas_1789075051_0.JPG",
+                "nombre": "Imagen 1"
+            }
+        ],
+        "activo": true,
+        "destacado": false,
+        "orden": 31
+    },
+    {
+        "id": "prod_6aa31f91c6b9b6.17582948",
+        "nombre": "Tónico facial Agua de Azahar",
+        "descripcion": "Formulado especialmente para pieles acneicas.\r\nUtilizar después de la limpieza facial para cerrar poros e hidratar la piel",
+        "imagen": "t__nico_facial_agua_de_azahar_1789075345_0.jpg",
+        "imagenes": [
+            {
+                "archivo": "t__nico_facial_agua_de_azahar_1789075345_0.jpg",
+                "nombre": "Imagen 1"
+            }
+        ],
+        "activo": true,
+        "destacado": false,
+        "orden": 32
+    },
+    {
+        "id": "prod_6aa3204baafc41.69615948",
+        "nombre": "Contorno de ojos roll on",
+        "descripcion": "Reduce las líneas de expresión, arrugas, bolsas, ojeras alrededor de los ojos.\r\nUso nocturno después de la limpieza.",
+        "imagen": "contorno_de_ojos_roll_on_1789075531_0.jpg",
+        "imagenes": [
+            {
+                "archivo": "contorno_de_ojos_roll_on_1789075531_0.jpg",
+                "nombre": "Imagen 1"
+            }
+        ],
+        "activo": true,
+        "destacado": false,
+        "orden": 33
+    },
+    {
+        "id": "prod_6aa320c94c7a33.17040595",
+        "nombre": "Contorno de ojos crema",
+        "descripcion": "Actúa sobre la delicada piel del contorno de los ojos. Reduce la apariencia de las líneas de expresión y la profundidad de las arrugas.",
+        "imagen": "contorno_de_ojos_crema_1789075657_0.JPG",
+        "imagenes": [
+            {
+                "archivo": "contorno_de_ojos_crema_1789075657_0.JPG",
+                "nombre": "Imagen 1"
+            }
+        ],
+        "activo": true,
+        "destacado": false,
+        "orden": 34
+    },
+    {
+        "id": "prod_6aa3213d1b0402.70860936",
+        "nombre": "Gel anti-acné",
+        "descripcion": "Ayuda a remover acné, puntos negros y reduce las cicatrices.\r\nLavarse la cara y aplicar directamente sobre el área afectada. Usar diariamente.",
+        "imagen": "gel_anti-acn___1789075773_0.JPG",
+        "imagenes": [
+            {
+                "archivo": "gel_anti-acn___1789075773_0.JPG",
+                "nombre": "Imagen 1"
+            }
+        ],
+        "activo": true,
+        "destacado": false,
+        "orden": 35
+    },
+    {
+        "id": "prod_6aa3f126705d43.88125926",
+        "nombre": "Serum Anti age",
+        "descripcion": "Rejuvenecedor, quita ojeras y bolsas oculares. Utilizar por la noche luego de la limpieza facial sobre el área de los ojos, arrugas, cicatrices y\/o estrías.",
+        "imagen": "serum_anti_age_1789128998_0.jpeg",
+        "imagenes": [
+            {
+                "archivo": "serum_anti_age_1789128998_0.jpeg",
+                "nombre": "Imagen 1"
+            }
+        ],
+        "activo": true,
+        "destacado": false,
+        "orden": 36
+    },
+    {
+        "id": "prod_6aa3f204c0a1d2.59777015",
+        "nombre": "Bálsamo labial",
+        "descripcion": "Es un producto emoliente, nutre, protege, hidrata. Es adecuada sobre todo para climas fríos y secos.",
+        "imagen": "b__lsamo_labial_1789129220_0.JPG",
+        "imagenes": [
+            {
+                "archivo": "b__lsamo_labial_1789129220_0.JPG",
+                "nombre": "Imagen 1"
+            }
+        ],
+        "activo": true,
+        "destacado": false,
+        "orden": 37
+    },
+    {
+        "id": "prod_6aa3f5f8c135d4.62926119",
+        "nombre": "Sales de baño",
+        "descripcion": "Es una mezcla perfecta para relajar y desinflamar el cuerpo. Anti estrés, calmante, regulador del sueño",
+        "imagen": "sales_de_ba__o_1789130232_0.png",
+        "imagenes": [
+            {
+                "archivo": "sales_de_ba__o_1789130232_0.png",
+                "nombre": "Imagen 1"
+            }
+        ],
+        "activo": true,
+        "destacado": false,
+        "orden": 38
+    },
+    {
+        "id": "prod_6aa3f850464bd3.78325090",
+        "nombre": "Serum Anticaspa",
+        "descripcion": "Regulador del ph del cuero cabelludo. Elimina la caspa, aportando brillo y nutriendo el cabello.\r\nAplicar en el cuero cabelludo y cabello seco haciendo masajes, dejar actuar durante 15 minutos y lavar normalmente",
+        "imagen": "serum_anticaspa_1789130832_0.jpeg",
+        "imagenes": [
+            {
+                "archivo": "serum_anticaspa_1789130832_0.jpeg",
+                "nombre": "Imagen 1"
+            }
+        ],
+        "activo": true,
+        "destacado": false,
+        "orden": 39
+    },
+    {
+        "id": "prod_6aa3fa2ee9e294.39519575",
+        "nombre": "Serum Capilar  Nutritivo",
+        "descripcion": "Fortalecedor capilar, aporta vitaminas, brillo y nutre el pelo desde la raíz a la punta. Útil para la caída del cabello o cabello débil.\r\nAplicar en el cabello seco haciendo masajes. Dejar actuar durante 15 minutos y luego lavar normalmente.",
+        "imagen": "serum_capilar__nutritivo_1789131310_0.jpeg",
+        "imagenes": [
+            {
+                "archivo": "serum_capilar__nutritivo_1789131310_0.jpeg",
+                "nombre": "Imagen 1"
+            }
+        ],
+        "activo": true,
+        "destacado": false,
+        "orden": 40
+    }
+]

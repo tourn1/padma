@@ -84,7 +84,7 @@ function e($str)
 }
 
 // Cargar catálogo para la home (solo los 3 primeros)
-$catalogFile = dirname(__FILE__) . '/admin/upload/catalog.txt';
+$catalogFile = dirname(__FILE__) . '/admin/catalog.txt';
 $heroProducts = [];
 if (file_exists($catalogFile)) {
     $content = file_get_contents($catalogFile);

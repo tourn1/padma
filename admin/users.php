@@ -16,7 +16,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'logout') {
 }
 
 // Configuración de rutas
-$usersFile = dirname(__FILE__) . '/upload/users.txt';
+$usersFile = dirname(__FILE__) . '/users.txt';
 
 // Crear directorio si no existe
 if (!file_exists(dirname($usersFile))) {
@@ -226,6 +226,8 @@ function e($str) {
             background: var(--admin-bar-bg);
             color: #ffffff;
             padding: 12px 24px;
+            height: 65px;
+            box-sizing: border-box;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -505,6 +507,9 @@ function e($str) {
             </a>
             <a href="users.php" class="btn-admin-view" style="font-weight: bold; border-bottom: 2px solid var(--admin-accent); padding-bottom: 4px;">
                 Usuarios
+            </a>
+            <a href="ajustes.php" class="btn-admin-view">
+                Ajustes
             </a>
             <a href="../index.php" target="_blank" class="btn-admin-view">
                 Ver Sitio

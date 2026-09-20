@@ -279,6 +279,8 @@ function e($str) {
             background: var(--admin-bar-bg);
             color: #ffffff;
             padding: 12px 24px;
+            height: 65px;
+            box-sizing: border-box;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -616,6 +618,9 @@ function e($str) {
             <div class="admin-bar-title">
                 <i class="fa-solid fa-pen-to-square"></i>
                 <span>Modo Edición - Padma Admin</span>
+                <button type="submit" class="btn-admin-save" style="margin-left: 15px;">
+                    <i class="fa-solid fa-floppy-disk"></i> Guardar Cambios
+                </button>
             </div>
             <div class="admin-bar-actions">
                 <a href="admin.php" class="btn-admin-view" style="font-weight: bold; border-bottom: 2px solid var(--admin-accent); padding-bottom: 4px;">
@@ -627,12 +632,12 @@ function e($str) {
                 <a href="users.php" class="btn-admin-view">
                     Usuarios
                 </a>
+                <a href="ajustes.php" class="btn-admin-view">
+                    Ajustes
+                </a>
                 <a href="../index.php" target="_blank" class="btn-admin-view">
                     Ver Sitio
                 </a>
-                <button type="submit" class="btn-admin-save">
-                    <i class="fa-solid fa-floppy-disk"></i> Guardar Cambios
-                </button>
                 <a href="admin.php?action=logout" class="btn-admin-logout" title="Cerrar Sesión">
                     <i class="fa-solid fa-right-from-bracket"></i> Salir
                 </a>

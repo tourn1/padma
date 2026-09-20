@@ -16,7 +16,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'logout') {
 }
 
 // Configuración de rutas
-$catalogFile = dirname(__FILE__) . '/upload/catalog.txt';
+$catalogFile = dirname(__FILE__) . '/catalog.txt';
 $imgUploadDir = dirname(dirname(__FILE__)) . '/assets/img/catalogo/';
 
 // Crear directorios si no existen
@@ -303,6 +303,8 @@ function e($str) {
             background: var(--admin-bar-bg);
             color: #ffffff;
             padding: 12px 24px;
+            height: 65px;
+            box-sizing: border-box;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -594,6 +596,9 @@ function e($str) {
             </a>
             <a href="users.php" class="btn-admin-view">
                 Usuarios
+            </a>
+            <a href="ajustes.php" class="btn-admin-view">
+                Ajustes
             </a>
             <a href="../index.php" target="_blank" class="btn-admin-view">
                 Ver Sitio

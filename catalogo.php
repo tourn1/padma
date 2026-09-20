@@ -1,6 +1,6 @@
 <?php
 // Catálogo de productos PADMA - Bienestar Emocional
-$catalogFile = dirname(__FILE__) . '/admin/upload/catalog.txt';
+$catalogFile = dirname(__FILE__) . '/admin/catalog.txt';
 
 $productos = [];
 $loadedFromCatalog = false;
