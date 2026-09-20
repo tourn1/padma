@@ -5,6 +5,7 @@
 <html lang="es">
 
 <head>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LGGNT2486F"></script>
     <script>

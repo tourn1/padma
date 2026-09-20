@@ -39,7 +39,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if ($validUser) {
+            session_regenerate_id(true);
             $_SESSION['admin_logged_in'] = true;
+            session_write_close();
             header('Location: admin.php');
             exit;
         } else {
@@ -309,7 +311,7 @@ $logoPath = file_exists(__DIR__ . '/upload/logo-padma.jpg') ? 'upload/logo-padma
                 </div>
             <?php endif; ?>
 
-            <form method="POST" action="index.php">
+            <form method="POST" action="">
                 <div class="form-group">
                     <label for="username" class="form-label">Usuario</label>
                     <div class="input-container">
