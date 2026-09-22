@@ -1,6 +1,5 @@
 <?php
 $textFile = dirname(__FILE__) . '/admin/text.txt';
-$uploadDir = dirname(__FILE__) . '/admin/upload/';
 
 $defaultTexts = [
     "brand_name" => "PADMA YOGA",
@@ -69,13 +68,22 @@ if (file_exists($textFile)) {
     }
 }
 
-function getImgUrl($filename)
+function getLogoUrl($filename = 'logo-padma.jpg')
 {
-    $uploadPath = dirname(__FILE__) . '/admin/upload/' . $filename;
-    if (file_exists($uploadPath)) {
-        return 'admin/upload/' . $filename . '?v=' . filemtime($uploadPath);
+    $logoPath = dirname(__FILE__) . '/assets/img/' . $filename;
+    if (file_exists($logoPath)) {
+        return 'assets/img/' . $filename . '?v=' . filemtime($logoPath);
     }
     return 'assets/img/' . $filename;
+}
+
+function getImgUrl($filename)
+{
+    $homePath = dirname(__FILE__) . '/assets/img/home/' . $filename;
+    if (file_exists($homePath)) {
+        return 'assets/img/home/' . $filename . '?v=' . filemtime($homePath);
+    }
+    return 'assets/img/home/' . $filename;
 }
 
 function e($str)
@@ -116,10 +124,10 @@ if (file_exists($catalogFile)) {
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LGGNT2486F"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-LGGNT2486F');
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-LGGNT2486F');
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -138,14 +146,14 @@ if (file_exists($catalogFile)) {
     <meta property="og:title" content="Padma Yoga & Productos Naturales | Bienestar Holístico">
     <meta property="og:description"
         content="Cosmética botánica orgánica, aromaterapia artesanal y clases de yoga para reconectar con tu bienestar diario.">
-    <meta property="og:image" content="<?php echo getImgUrl('logo-padma.jpg'); ?>">
+    <meta property="og:image" content="<?php echo getLogoUrl('logo-padma.jpg'); ?>">
 
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Padma Yoga & Productos Naturales | Bienestar Holístico">
     <meta name="twitter:description"
         content="Productos 100% naturales y clases de yoga diseñadas para reconectar con tu esencia.">
-    <meta name="twitter:image" content="<?php echo getImgUrl('logo-padma.jpg'); ?>">
+    <meta name="twitter:image" content="<?php echo getLogoUrl('logo-padma.jpg'); ?>">
 
     <!-- Schema.org JSON-LD (Structured Data for Google) -->
     <script type="application/ld+json">
@@ -154,7 +162,7 @@ if (file_exists($catalogFile)) {
       "@type": "HealthAndBeautyBusiness",
       "name": "Padma Yoga & Productos Naturales",
       "description": "Productos orgánicos, cosmética artesanal, aceites esenciales y clases de yoga para el bienestar holístico.",
-      "image": "<?php echo getImgUrl('logo-padma.jpg'); ?>",
+      "image": "<?php echo getLogoUrl('logo-padma.jpg'); ?>",
       "sameAs": [
         "https://www.instagram.com/padma.y.yoga/"
       ]
@@ -178,7 +186,7 @@ if (file_exists($catalogFile)) {
     <!-- Header Navigation -->
     <header id="header">
         <a href="#" class="brand-logo">
-            <img src="<?php echo getImgUrl('logo-padma.jpg'); ?>" alt="Padma Yoga Logo">
+            <img src="<?php echo getLogoUrl('logo-padma.jpg'); ?>" alt="Padma Yoga Logo">
             <span class="brand-logo-text"><?php echo e($texts['brand_name']); ?></span>
         </a>
         <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
@@ -237,9 +245,8 @@ if (file_exists($catalogFile)) {
                 padding: 0.55rem 1.4rem;
                 border-radius: 50px;
                 transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-            "
-            onmouseover="this.style.background='var(--sage)';this.style.color='#fff';"
-            onmouseout="this.style.background='transparent';this.style.color='var(--sage)';">
+            " onmouseover="this.style.background='var(--sage)';this.style.color='#fff';"
+                onmouseout="this.style.background='transparent';this.style.color='var(--sage)';">
                 <i class="fas fa-spa"></i> Saber más sobre Aromaterapia
             </a>
         </div>

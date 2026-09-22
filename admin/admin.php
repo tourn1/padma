@@ -17,10 +17,11 @@ if (isset($_GET['action']) && $_GET['action'] === 'logout') {
 
 // Configuración de rutas y persistencia
 $textFile = dirname(__FILE__) . '/text.txt';
-$uploadDir = dirname(__FILE__) . '/upload/';
+$logoDir = dirname(dirname(__FILE__)) . '/assets/img/';
+$homeImgDir = dirname(dirname(__FILE__)) . '/assets/img/home/';
 
-if (!file_exists($uploadDir)) {
-    mkdir($uploadDir, 0755, true);
+if (!file_exists($homeImgDir)) {
+    mkdir($homeImgDir, 0755, true);
 }
 
 // Cargar textos y enlaces existentes o inicializar vacíos
@@ -162,15 +163,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_FILES[$inputKey])) {
             $fileError = $_FILES[$inputKey]['error'];
             if ($fileError === UPLOAD_ERR_OK) {
+                // Determinar directorio destino: el logo en assets/img/, el resto en assets/img/home/
+                $destDir = ($inputKey === 'img_logo') ? $logoDir : $homeImgDir;
+                $destDirName = ($inputKey === 'img_logo') ? 'assets/img/' : 'assets/img/home/';
+
                 // Verificar permisos del directorio de subidas
-                if (!is_writable($uploadDir)) {
-                    $errorMessages[] = "Error de permisos: La carpeta de subidas 'upload/' no tiene permisos de escritura (Ruta: " . realpath($uploadDir) . ").";
+                if (!is_writable($destDir)) {
+                    $errorMessages[] = "Error de permisos: La carpeta '" . $destDirName . "' no tiene permisos de escritura (Ruta: " . realpath($destDir) . ").";
                     $hasErrors = true;
                     continue;
                 }
 
                 $tmpPath = $_FILES[$inputKey]['tmp_name'];
-                $targetPath = $uploadDir . $originalFilename;
+                $targetPath = $destDir . $originalFilename;
 
                 $isClassImg = in_array($inputKey, ['img_c1', 'img_c2', 'img_c3']);
                 $ext = strtolower(pathinfo($_FILES[$inputKey]['name'], PATHINFO_EXTENSION));
@@ -179,7 +184,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if ($isClassImg && $isVideo) {
                     $classNum = substr($inputKey, 5); // '1', '2', '3'
                     $videoFilename = pathinfo($originalFilename, PATHINFO_FILENAME) . '.' . $ext;
-                    $targetPath = $uploadDir . $videoFilename;
+                    $targetPath = $destDir . $videoFilename;
 
                     if (move_uploaded_file($tmpPath, $targetPath)) {
                         $uploadedCount++;
@@ -232,13 +237,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Helper para obtener URL de imagen
-function getAdminImgUrl($filename) {
-    $uploadPath = __DIR__ . '/upload/' . $filename;
-    if (file_exists($uploadPath)) {
-        return 'upload/' . $filename . '?v=' . filemtime($uploadPath);
+// Helper para obtener URL de imagen en el Admin
+function getAdminImgUrl($filename, $isLogo = false) {
+    if ($isLogo || $filename === 'logo-padma.jpg') {
+        $logoPath = dirname(dirname(__FILE__)) . '/assets/img/' . $filename;
+        if (file_exists($logoPath)) {
+            return '../assets/img/' . $filename . '?v=' . filemtime($logoPath);
+        }
+        return '../assets/img/' . $filename;
     }
-    return '../assets/img/' . $filename;
+
+    $homePath = dirname(dirname(__FILE__)) . '/assets/img/home/' . $filename;
+    if (file_exists($homePath)) {
+        return '../assets/img/home/' . $filename . '?v=' . filemtime($homePath);
+    }
+    return '../assets/img/home/' . $filename;
 }
 
 // Helper para escapar HTML

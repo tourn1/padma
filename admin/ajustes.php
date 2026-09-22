@@ -40,15 +40,33 @@ if (isset($_GET['action']) && $_GET['action'] === 'backup') {
         $zip->close();
         
         if ($hasFiles && file_exists($zipPath)) {
-            header('Content-Type: application/zip');
-            header('Content-disposition: attachment; filename=' . $zipName);
-            header('Content-Length: ' . filesize($zipPath));
-            readfile($zipPath);
-            unlink($zipPath);
+            @set_time_limit(0);
+            while (ob_get_level()) {
+                ob_end_clean();
+            }
+            $fileSize = filesize($zipPath);
+
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename="' . $zipName . '"');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+            header('Pragma: public');
+            header('Content-Length: ' . $fileSize);
+
+            $handle = fopen($zipPath, 'rb');
+            if ($handle !== false) {
+                while (!feof($handle) && connection_status() == 0) {
+                    echo fread($handle, 1024 * 64);
+                    flush();
+                }
+                fclose($handle);
+            }
+            @unlink($zipPath);
             exit;
         } else {
             $errorMessages[] = "No se encontraron archivos de texto (.txt) para respaldar.";
-            if (file_exists($zipPath)) unlink($zipPath);
+            if (file_exists($zipPath)) @unlink($zipPath);
         }
     } else {
         $errorMessages[] = "No se pudo crear el archivo ZIP para el backup.";
@@ -65,8 +83,10 @@ if (isset($_GET['action']) && $_GET['action'] === 'backup_images') {
 
     if ($zip->open($zipPath, ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
         $dirsToBackup = [
-            'admin/upload' => dirname(__FILE__) . '/upload',
-            'assets/img/catalogo' => dirname(dirname(__FILE__)) . '/assets/img/catalogo'
+            'assets/img/home' => dirname(dirname(__FILE__)) . '/assets/img/home',
+            'assets/img/catalogo' => dirname(dirname(__FILE__)) . '/assets/img/catalogo',
+            'assets/img' => dirname(dirname(__FILE__)) . '/assets/img',
+            'admin/upload' => dirname(__FILE__) . '/upload'
         ];
         
         $hasFiles = false;
@@ -88,15 +108,38 @@ if (isset($_GET['action']) && $_GET['action'] === 'backup_images') {
         $zip->close();
         
         if ($hasFiles && file_exists($zipPath)) {
-            header('Content-Type: application/zip');
-            header('Content-disposition: attachment; filename=' . $zipName);
-            header('Content-Length: ' . filesize($zipPath));
-            readfile($zipPath);
-            unlink($zipPath);
+            // Desactivar límites de tiempo si está permitido
+            @set_time_limit(0);
+
+            // Limpiar buffers de salida previos para no saturar memoria
+            while (ob_get_level()) {
+                ob_end_clean();
+            }
+
+            $fileSize = filesize($zipPath);
+
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename="' . $zipName . '"');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+            header('Pragma: public');
+            header('Content-Length: ' . $fileSize);
+
+            // Streaming por bloques para evitar saturar memoria en servidores compartidos
+            $handle = fopen($zipPath, 'rb');
+            if ($handle !== false) {
+                while (!feof($handle) && connection_status() == 0) {
+                    echo fread($handle, 1024 * 64); // Enviar en bloques de 64KB
+                    flush();
+                }
+                fclose($handle);
+            }
+            @unlink($zipPath);
             exit;
         } else {
             $errorMessages[] = "No se encontraron imágenes o medios en el directorio de subidas para respaldar.";
-            if (file_exists($zipPath)) unlink($zipPath);
+            if (file_exists($zipPath)) @unlink($zipPath);
         }
     } else {
         $errorMessages[] = "No se pudo crear el archivo ZIP para el backup de imágenes.";
